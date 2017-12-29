@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿// Login tutorial from https://www.youtube.com/watch?v=h9Fv9b39_tw used as starting point and guide.
+
+using UnityEngine;
 using System.Collections;
 
 public class Login : MonoBehaviour {
