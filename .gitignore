@@ -34,4 +34,7 @@ sysinfo.txt
 *.unitypackage
 
 /A Hot Mess/Library/metadata/
+/A Hot Mess/Library/ShaderCache/
 /A Hot Mess/Temp/
+
+*.log
