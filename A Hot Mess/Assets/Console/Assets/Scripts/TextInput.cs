@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TextInput : MonoBehaviour //This without recognition will only mirror the text back to the player
+public class TextInput : MonoBehaviour //This without recognition of the input will only mirror the text back to the player
 {
 	public InputField inputField; //Eventsystem is waiting for an event button i.e. enter
 

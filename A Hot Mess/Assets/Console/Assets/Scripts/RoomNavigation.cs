@@ -15,7 +15,7 @@ public class RoomNavigation : MonoBehaviour {
 		controller = GetComponent<GameController> (); 
 	}
 
-	public void UnpackExitsInRoom()	//unpack exits and display them as a list of exitsS
+	public void UnpackExitsInRoom()	//unpack exits and display them as a list of exits
 	{
 		for (int i = 0; i < currentRoom.exits.Length; i++) 
 		{
