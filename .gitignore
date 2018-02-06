@@ -12,7 +12,6 @@
 ExportedObj/
 .consulo/
 *.csproj
-*.unityproj
 *.sln
 *.suo
 *.tmp
@@ -31,7 +30,6 @@ sysinfo.txt
 
 # Builds
 *.apk
-*.unitypackage
 
 /A Hot Mess/Library/metadata/
 /A Hot Mess/Library/ShaderCache/
