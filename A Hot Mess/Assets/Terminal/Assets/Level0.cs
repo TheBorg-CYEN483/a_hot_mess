@@ -16,47 +16,58 @@ public class Level0 : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        chat();
         chatbutton.onClick.AddListener(() => chat());
         manualbutton.onClick.AddListener(() => manual());
+        inputfield.ActivateInputField();
     }
 
     // Update is called once per frame
     void Update()
     {
         string input = inputfield.text;
-        string shortened;
 
-        //if (Input.GetKeyDown(KeyCode.Return))
-        //{
-
-        //}
-        List<string> wireshark = new List<string>()
+        List<string> options = new List<string>()
         {
-            "-v", "-k"
+            "10.240.13.76", "27.19.100.145", "100.102.63.74", "190.1.2.10",
+            "201.2.5.100"
         };
 
         string[] split = input.Split(' ');
+        
 
-        foreach (var word in split)
+        if (Input.GetKeyDown(KeyCode.Return))
         {
-            if (Input.GetKeyDown(KeyCode.Return))
+
+            if (split.Length == 1 && split[0] == "iptables")
             {
-                output_text.text += ">>  " + input;
-                if (split[0] == "wireshark")
+                output_text.text += ">>  " + "That's the right command, but try using some of the options!" + "\n";
+            }
+            if (split.Length == 7 && split[0] == "iptables" && split[1] == "-A" && split[2] == "INPUT" && split[3] == "-s" && split[5] == "-j" &&
+                split[6] == "DROP")
+            {
+                output_text.text += ">>  " + "Right command, wrong IP address!" + "\n";
+                if(options.Contains(split[4]))
                 {
-                    shortened = input.Replace("wireshark ", "");
-                    if (wireshark[0].Contains(shortened))
-                    {
-                        output_text.text += "\nThis worked.";
-                    }
+                    output_text.text += "valid IP";
                 }
             }
+            
+            inputfield.text = "";
+            inputfield.ActivateInputField();
         }
     }
 
+
     void chat()
     {
-        chat_man.text = "other blah blah blah";
+        chat_man.text = "Charles: The box at the bottom is called a terminal. You can type commands into it and " +
+            "press enter. Hints will appear in the manual in this box. Just click the manual tab an check it " +
+            "out if you need any help! Click the chat button to talk to us again.";
+
+        chat_man.text = "Alan: Okay, see these IP addresses here? Each one is a computer in this basement. " +
+            "192.168.1.100 is mine, 192.168.1.101 is Ada’s computer, and 192.168.1.102 is Charles’ computer. " +
+            "Yours is 192.168.1.103.";
     }
 
     void manual()
