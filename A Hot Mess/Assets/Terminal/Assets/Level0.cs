@@ -61,13 +61,14 @@ public class Level0 : MonoBehaviour
 
     void chat()
     {
-        chat_man.text = "Charles: The box at the bottom is called a terminal. You can type commands into it and " +
+        string[] chat_array = {"Charles: The box at the bottom is called a terminal. You can type commands into it and " +
             "press enter. Hints will appear in the manual in this box. Just click the manual tab an check it " +
-            "out if you need any help! Click the chat button to talk to us again.";
-
-        chat_man.text = "Alan: Okay, see these IP addresses here? Each one is a computer in this basement. " +
+            "out if you need any help! Click the chat button to talk to us again.", "Alan: Okay, see these IP addresses here? " +
+            "Each one is a computer in this basement. " +
             "192.168.1.100 is mine, 192.168.1.101 is Ada’s computer, and 192.168.1.102 is Charles’ computer. " +
-            "Yours is 192.168.1.103.";
+            "Yours is 192.168.1.103."};
+
+        chat_man.text = chat_array[0];
     }
 
     void manual()
