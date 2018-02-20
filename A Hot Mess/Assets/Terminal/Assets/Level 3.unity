@@ -762,7 +762,10 @@ GameObject:
   - component: {fileID: 477129322}
   - component: {fileID: 477129321}
   - component: {fileID: 477129320}
+<<<<<<< HEAD
   - component: {fileID: 477129324}
+=======
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -802,11 +805,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputfield: {fileID: 477129321}
+<<<<<<< HEAD
   output_text: {fileID: 0}
   keyword: ' '
   chat_man: {fileID: 0}
   chatbutton: {fileID: 0}
   manualbutton: {fileID: 0}
+=======
+  text: {fileID: 0}
+  keyword: ' '
+  chat_man: {fileID: 0}
+  button1: {fileID: 0}
+  button2: {fileID: 0}
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
 --- !u!114 &477129321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -903,6 +914,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 477129318}
+<<<<<<< HEAD
 --- !u!114 &477129324
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -920,6 +932,8 @@ MonoBehaviour:
   chat_man: {fileID: 94319921}
   chatbutton: {fileID: 1046799360}
   manualbutton: {fileID: 2109548366}
+=======
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
 --- !u!1 &520989881
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,6 +1884,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1242663679}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 11500000, guid: bc87de1d968287f4b85fdd39ba1cb2c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
@@ -1879,6 +1894,17 @@ MonoBehaviour:
   chat_man: {fileID: 94319921}
   chatbutton: {fileID: 1046799360}
   manualbutton: {fileID: 2109548366}
+=======
+  m_Script: {fileID: 11500000, guid: 549568a9c52bd604bac1ffb64793f601, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputfield: {fileID: 477129321}
+  text: {fileID: 520989883}
+  keyword: ' '
+  chat_man: {fileID: 94319921}
+  button1: {fileID: 1046799360}
+  button2: {fileID: 2109548366}
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
 --- !u!114 &1242663682
 MonoBehaviour:
   m_ObjectHideFlags: 0
