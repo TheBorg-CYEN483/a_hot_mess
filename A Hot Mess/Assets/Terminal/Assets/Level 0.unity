@@ -123,7 +123,11 @@ GameObject:
   - component: {fileID: 168063}
   - component: {fileID: 168065}
   - component: {fileID: 168064}
+<<<<<<< HEAD
+  - component: {fileID: 168067}
+=======
   - component: {fileID: 168066}
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -148,7 +152,10 @@ RectTransform:
   - {fileID: 1309701616}
   - {fileID: 1528442691}
   - {fileID: 715246830}
+<<<<<<< HEAD
+=======
   - {fileID: 914114450}
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
   m_Father: {fileID: 2009472102}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -190,7 +197,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 168062}
+<<<<<<< HEAD
+--- !u!114 &168067
+=======
 --- !u!114 &168066
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -198,7 +209,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 168062}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
+  m_Script: {fileID: 11500000, guid: 549568a9c52bd604bac1ffb64793f601, type: 3}
+=======
   m_Script: {fileID: 11500000, guid: d11a12170acfd1741866b5e9f703e7e9, type: 3}
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
   m_Name: 
   m_EditorClassIdentifier: 
   inputfield: {fileID: 1309701617}
@@ -275,6 +290,8 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1361271}
+<<<<<<< HEAD
+=======
 --- !u!1 &3420801
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,6 +440,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 137982987}
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
 --- !u!1 &219702532
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1158,8 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 715246829}
+<<<<<<< HEAD
+=======
 --- !u!1 &914114449
 GameObject:
   m_ObjectHideFlags: 0
@@ -1208,6 +1228,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 914114449}
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
 --- !u!1 &914601495
 GameObject:
   m_ObjectHideFlags: 0
@@ -1790,6 +1811,10 @@ GameObject:
   - component: {fileID: 1309701619}
   - component: {fileID: 1309701618}
   - component: {fileID: 1309701617}
+<<<<<<< HEAD
+  - component: {fileID: 1309701620}
+=======
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -1913,6 +1938,26 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1309701615}
+<<<<<<< HEAD
+--- !u!114 &1309701620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1309701615}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc87de1d968287f4b85fdd39ba1cb2c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  inputfield: {fileID: 0}
+  output_text: {fileID: 0}
+  keyword: ' '
+  chat_man: {fileID: 0}
+  chatbutton: {fileID: 0}
+  manualbutton: {fileID: 0}
+=======
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
 --- !u!1 &1428933842
 GameObject:
   m_ObjectHideFlags: 0
@@ -2450,6 +2495,8 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1845684119}
+<<<<<<< HEAD
+=======
 --- !u!1 &1847923700
 GameObject:
   m_ObjectHideFlags: 0
@@ -2537,6 +2584,7 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1847923700}
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
 --- !u!1 &1849195136
 GameObject:
   m_ObjectHideFlags: 0
@@ -2732,9 +2780,12 @@ RectTransform:
   m_Children:
   - {fileID: 168063}
   - {fileID: 390168257}
+<<<<<<< HEAD
+=======
   - {fileID: 1847923701}
   - {fileID: 137982988}
   - {fileID: 3420802}
+>>>>>>> bcde2fdd3bb2ba1b31b4f59a4d9e69c99488feb1
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
