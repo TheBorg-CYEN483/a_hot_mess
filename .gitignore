@@ -35,3 +35,5 @@ sysinfo.txt
 /A Hot Mess/Temp/
 
 *.log
+A Hot Mess/Assets/Terminal/ProjectSettings/ProjectVersion.txt
+*.meta
