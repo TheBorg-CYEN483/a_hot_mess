@@ -30,10 +30,9 @@ sysinfo.txt
 # Builds
 *.apk
 
-/A Hot Mess/Library/metadata/
-/A Hot Mess/Library/ShaderCache/
-/A Hot Mess/Temp/
+/Security Game/Library/
+/Security Game/Temp/
 
 *.log
-A Hot Mess/Assets/Terminal/ProjectSettings/ProjectVersion.txt
+/Security Game/ProjectSettings/ProjectVersion.txt
 *.meta
