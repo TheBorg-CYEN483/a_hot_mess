@@ -30,8 +30,11 @@ sysinfo.txt
 # Builds
 *.apk
 
-/Security Game/Library/
 /Security Game/Temp/
+/Security Game/Library/
+/Security Game/Library/CurrentMaximizeLayout.dwlt
+/Security Game/Library/EditorUserBuildSettings.asset
+/Security Game/Library/ScriptAssemblies/
 
 *.log
 /Security Game/ProjectSettings/ProjectVersion.txt
