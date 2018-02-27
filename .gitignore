@@ -31,6 +31,8 @@ sysinfo.txt
 *.apk
 
 Security Game/Temp/
+Security Game/ProjectSettings/
+Security Game/.vscode/
 Security Game/Library/
 Security Game/Library/CurrentMaximizeLayout.dwlt
 Security Game/Library/EditorUserBuildSettings.asset
