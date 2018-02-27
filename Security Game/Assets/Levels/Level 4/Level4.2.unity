@@ -394,7 +394,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 77367835}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4016eca80c63f0c458e775c61c235045, type: 3}
+  m_Script: {fileID: 11500000, guid: b23297ed7b0282e4c803b7c3a8ee93ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputfield: {fileID: 470321332}
@@ -1757,12 +1757,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 549568a9c52bd604bac1ffb64793f601, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputfield: {fileID: 0}
-  output_text: {fileID: 0}
-  keyword: ' '
-  chat_man: {fileID: 0}
-  chatbutton: {fileID: 0}
-  manualbutton: {fileID: 0}
 --- !u!114 &470321332
 MonoBehaviour:
   m_ObjectHideFlags: 0

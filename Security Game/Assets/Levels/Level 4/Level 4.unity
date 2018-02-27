@@ -842,7 +842,6 @@ GameObject:
   - component: {fileID: 477129323}
   - component: {fileID: 477129322}
   - component: {fileID: 477129321}
-  - component: {fileID: 477129320}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -870,23 +869,6 @@ RectTransform:
   m_AnchoredPosition: {x: -264.32, y: -414.7}
   m_SizeDelta: {x: 938.66, y: 52.1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &477129320
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 477129318}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 549568a9c52bd604bac1ffb64793f601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  inputfield: {fileID: 477129321}
-  output_text: {fileID: 0}
-  keyword: ' '
-  chat_man: {fileID: 0}
-  chatbutton: {fileID: 0}
-  manualbutton: {fileID: 0}
 --- !u!114 &477129321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1935,7 +1917,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1242663679}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f5f965463d1aa40afa291afafafc62, type: 3}
+  m_Script: {fileID: 11500000, guid: 051a426fed489414a9cef2ee92d96722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputfield: {fileID: 477129321}
@@ -1947,6 +1929,243 @@ MonoBehaviour:
   chat_man: {fileID: 94319921}
   chatbutton: {fileID: 1046799360}
   manualbutton: {fileID: 2109548366}
+  temp: 0
+  plaintemp:
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
 --- !u!114 &1242663682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,7 +2418,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 73ab01f9bcc61b1469308ddfc1d1cf23, type: 3}
+    m_Font: {fileID: 12800000, guid: d0d37b8fe8ed7fc4cbf08efe4b0db23f, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
@@ -2552,7 +2771,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 73ab01f9bcc61b1469308ddfc1d1cf23, type: 3}
+    m_Font: {fileID: 12800000, guid: d0d37b8fe8ed7fc4cbf08efe4b0db23f, type: 3}
     m_FontSize: 30
     m_FontStyle: 0
     m_BestFit: 0
