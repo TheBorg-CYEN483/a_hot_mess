@@ -5,8 +5,6 @@ using UnityEngine.UI;
 
 
 public class Terminal_Raw_020618 : MonoBehaviour {
-
-
     public InputField inputfield;
     public Text output_text;
     public string keyword = " ";
@@ -17,8 +15,8 @@ public class Terminal_Raw_020618 : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
-        chatbutton.onClick.AddListener(() => switchToChat());
-        manualbutton.onClick.AddListener(() => switchToManual());
+        chatbutton.onClick.AddListener(() => chat());
+        manualbutton.onClick.AddListener(() => manual());
     }
    
     // Update is called once per frame
@@ -55,12 +53,12 @@ public class Terminal_Raw_020618 : MonoBehaviour {
         }
     }
 
-    void switchToChat()
+    void chat()
     {
         chat_man.text = "other blah blah blah";
     }
 
-    void switchToManual()
+    void manual()
     {
         chat_man.text = "-iptables: This command lets you edit the blacklist." +
             "\n-Try using '-A INPUT' to add something new to the blacklist." +
