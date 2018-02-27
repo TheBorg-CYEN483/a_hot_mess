@@ -179,9 +179,7 @@ public class Level1 : MonoBehaviour {
 		}
 
 		// Return output based on successful check
-		incremenetScenePhase ();
-
-		// And Temporary Description in the terminal output
+		//  Temporary Description in the terminal output
 		switch(currSceneProgress)
 		{
 		case 0:
@@ -194,8 +192,10 @@ public class Level1 : MonoBehaviour {
 			terminalLog ("Cracking WPA key from captureFile.pak, weakPasswordList");
 			break;
 		case 3:
-			terminalLog ("Password Accepted; Level Complete");
+			terminalLog ("Password Accepted; Level Solved");
 			break;
 		}
+
+		incremenetScenePhase ();
 	}
 }

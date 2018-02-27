@@ -36,6 +36,11 @@ namespace AssemblyCSharp
 			"all the informatin we need to find the password.  Now all we need to do is run the script to "+
 			"compare the messages to the list of passwords, and we'll be through this door in no time!");
 
+			chatPanes.Add ("Charles: That must be it! Go type it in!");
+
+			chatPanes.Add ("Charles: Now that you’re on the network, the door unlocked to let you through! " +
+			"Keep going, and be careful! Who knows what they might do to you if they find out you hacked into their network.");
+
 		}
 
 		public string getChatPane(int i)
