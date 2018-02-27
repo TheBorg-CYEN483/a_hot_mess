@@ -32,6 +32,7 @@ sysinfo.txt
 
 Security Game/Temp/
 Security Game/ProjectSettings/
+Security Game/UnityPackageManager/
 Security Game/.vscode/
 Security Game/Library/
 Security Game/Library/CurrentMaximizeLayout.dwlt
@@ -43,5 +44,5 @@ BuiltinAssemblies.stamp
 CurrentMaximizeLayout.dwlt
 
 *.log
-Security Game/ProjectSettings/ProjectVersion.txt
 *.meta
+
