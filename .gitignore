@@ -36,6 +36,9 @@ sysinfo.txt
 /Security Game/Library/EditorUserBuildSettings.asset
 /Security Game/Library/ScriptAssemblies/
 
+BuiltinAssemblies.stamp
+CurrentMaximizeLayout.dwlt
+
 *.log
 /Security Game/ProjectSettings/ProjectVersion.txt
 *.meta
