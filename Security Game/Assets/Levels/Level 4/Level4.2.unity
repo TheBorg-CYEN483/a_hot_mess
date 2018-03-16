@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.4964127, b: 0.5748172, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -394,7 +394,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 77367835}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b23297ed7b0282e4c803b7c3a8ee93ff, type: 3}
+  m_Script: {fileID: 11500000, guid: 38563d35a201b5c4e996b82603c6ff50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   inputfield: {fileID: 470321332}
@@ -1718,7 +1718,6 @@ GameObject:
   - component: {fileID: 470321334}
   - component: {fileID: 470321333}
   - component: {fileID: 470321332}
-  - component: {fileID: 470321331}
   m_Layer: 5
   m_Name: InputField
   m_TagString: Untagged
@@ -1746,17 +1745,6 @@ RectTransform:
   m_AnchoredPosition: {x: -264.32, y: -414.7}
   m_SizeDelta: {x: 938.66, y: 52.1}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &470321331
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 470321329}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 549568a9c52bd604bac1ffb64793f601, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &470321332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3087,7 +3075,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 01dac194268562841b0e91dfecfb7240, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2cbf67c72c239f342bbbcaddbaf541f2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
