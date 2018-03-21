@@ -7,7 +7,7 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     private GameObject[] packets;
 
-    private float timeBetweenPackets = 3f;
+    private float timeBetweenPackets = 3.2f;
     private float minX = -125f;
     private float maxX = 125f;
     private float minY = -10f;
