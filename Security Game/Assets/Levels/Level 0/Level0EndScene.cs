@@ -27,7 +27,7 @@ public class Level0EndScene : MonoBehaviour
     }
 
     string[] text_array = {"Ada: Thanks for setting up the firewall! You did way better than Alan would have!",
-        "Alan: Thanks Ada.Hey, why is our network still acting funny?",
+        "Alan: Thanks Ada. Hey, why is our network still acting funny?",
         "Charles: Someone got in anyway! They’re taking our files!",
         "Ada: Alan!",
         "Charles: They kidnapped him! New kid, you’re up! It looks like the connection is coming from a tower to the east of here. " +
@@ -38,11 +38,11 @@ public class Level0EndScene : MonoBehaviour
     void goForward()
     {
         Debug.Log("forward");
-        if (scene < 7)
+        if (scene < 6)
         {
             scene += 1;
         }
-        if (scene == 7)
+        if (scene == 6)
         {
             SceneManager.LoadScene(("Tower"));
         }
