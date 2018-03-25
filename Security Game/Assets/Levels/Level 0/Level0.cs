@@ -100,7 +100,7 @@ public class Level0 : MonoBehaviour
     void chat()
     {
         string[] chat_array = {"Charles: The box at the bottom is called a terminal. You can type commands into it and " +
-            "press enter. \n\nHints will appear in the manual in this box. Just click the manual tab an check it " +
+            "press enter. \n\nHints will appear in the manual in this box. Just click the manual tab and check it " +
             "out if you need any help! Click the chat button to talk to us again." };
 
         chat_man.text = chat_array[0];
