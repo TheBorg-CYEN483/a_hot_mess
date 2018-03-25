@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Level4_2 : MonoBehaviour {
@@ -14,6 +15,8 @@ public class Level4_2 : MonoBehaviour {
     public Image panel;
     public Text alan;
     public Image meme;
+    public int count;
+
 	// Use this for initialization
 	void Start () {
 		
@@ -35,6 +38,32 @@ public class Level4_2 : MonoBehaviour {
         string[] input_parse = input_text.Split(' ');
         if (Input.GetKeyDown(KeyCode.Return))
         {
+            if(input_parse[0] == "sudo")
+            {
+                if (input_parse[1] == "find")
+                {
+                    if(input_parse[2] == "-iname")
+                    {
+                        if (input_parse[3] == "alan")
+                        {
+                            output_text.text = "Alan is in the Viruses folder.";
+                        }
+                    }
+                    else if(input_parse[2] == "alan")
+                    {
+                        output_text.text = "There is no file named 'alan'. Try using '-iname' after 'find' so the terminal ignores case.";
+                    }
+                    else if (input_parse[2] == "Alan")
+                    {
+                        output_text.text = "Alan is in the 'Viruses' folder";
+                    }
+                }
+            }
+            else if(input_parse[0] == "find")
+            {
+                output_text.text = "You do not have sudo priveleges.";
+            }
+
             if (input_parse[0] == "cd")
             {
                 new_text = input_text.Replace("cd ", "");
@@ -43,6 +72,7 @@ public class Level4_2 : MonoBehaviour {
                 {
                     panel.color = new Color(255, 255, 255, 255);
                     alan.text = "Alan.jpg";
+                    count = 1;
                 }
                 else if(new_text == "Memes")
                 {
@@ -56,9 +86,39 @@ public class Level4_2 : MonoBehaviour {
                 {
                     panel.color = new Color(255, 255, 255, 0);
                     meme.color = new Color(255, 255, 255, 0);
+                    alan.color = new Color(255, 255, 255, 0);
+
                 }
             }
+
+            if (input_text != "open Alan.jpg")
+            {
+                if (input_parse[0] == "open" && input_parse[1] == "Alan.jpg" && count == 1)
+                {
+                    if (input_parse[2] == "-p")
+                    {
+                        if (input_parse[3] == "HACKER")
+                        {
+                            winner();
+                        }
+                        else
+                        {
+                            output_text.text = "That is not the correct password";
+                        }
+                    }
+                }
+            }
+            else
+            {
+                output_text.text = "This file is password protected.";
+            }
+            
         }
 
 	}
+    void winner()
+    {
+        SceneManager.LoadScene(("Level4badge"));
+        
+    }
 }
