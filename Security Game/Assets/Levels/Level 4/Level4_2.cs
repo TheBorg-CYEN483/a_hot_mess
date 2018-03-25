@@ -19,8 +19,10 @@ public class Level4_2 : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-	}
+        chatbutton.onClick.AddListener(() => chat());               //chat button
+        manualbutton.onClick.AddListener(() => manual());           //manual button
+        chat();
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -120,5 +122,19 @@ public class Level4_2 : MonoBehaviour {
     {
         SceneManager.LoadScene(("Level4badge"));
         
+    }
+
+    void chat()
+    {
+        chat_man.text = "Charles: Great! We got the password! We don't know what it goes to yet,"
+    +  "but I think right now we just need to access their file system and FIND Alan. Ada, don't we"
+    + "have a command for that? \nAda: Shh, Charles. They know how to use the manual. Let them figure it out.";
+    }
+    
+    void manual()
+    {
+        chat_man.text = "sudo: gives administrative privileges \n \nfind: searches the file system for a file \n \n-iname:"
+            + " a parameter for 'find' to allow it to ignore how the file name is typed \n\ncd: when followed by the folder name,"
+            + "cd allows you to go to that folder\n \n '\\' + space: allows you to have spaces in a file name. \nex: cd Funny\\ Pictures";
     }
 }
