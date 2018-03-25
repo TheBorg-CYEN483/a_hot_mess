@@ -22,6 +22,7 @@ public class Level0IntroScript : MonoBehaviour {
     public Image firewall;
     public Text blacklistText;
     public Image blacklist;
+    public Image blackbackground;
 
     int scene = 0;
 
@@ -92,6 +93,7 @@ public class Level0IntroScript : MonoBehaviour {
             blacklistText.color = new Color(0, 0, 0, 0);
             leftButton.interactable = true;
             rightButton.interactable = true;
+            blackbackground.color = new Color(0, 0, 0, 0);
         }
 
         if(scene == 3)
@@ -100,6 +102,7 @@ public class Level0IntroScript : MonoBehaviour {
             rightButton.interactable = true;
             blacklist.color = new Color(255, 0, 0, 255);
             blacklistText.color = new Color(255, 0, 0, 255);
+            blackbackground.color = new Color(0, 0, 0, 255);
         }
     }
    

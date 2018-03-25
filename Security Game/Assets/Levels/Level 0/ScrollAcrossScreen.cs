@@ -23,7 +23,7 @@ public class ScrollAcrossScreen : MonoBehaviour
         //stop IP at firewall if it has been blocked
         if (Level0.helper(gameObject.name))
         {
-            if (curr_pos.x < 199 || curr_pos.x > 201)
+            if (curr_pos.x < 549 || curr_pos.x > 551)
             {
                 transform.Translate(speed, 0, 0);
                 if (curr_pos.x >= 1200)
