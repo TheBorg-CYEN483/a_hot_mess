@@ -100,7 +100,7 @@ public class Level3  : MonoBehaviour
                     if (split[1] == "--scan-all")
                     {                   
                         dialog_text = 
-                        "Ada: Good, now you can see the malware \n" +
+                        "Ada: Good, now you can see the malware \n" + "\n" +
                         "Charles: Luckily, MalChecker trapped them in the failure folder.\n" + 
                         "They can’t move anymore." + 
                         "\nNow you just need to remove the folder.\n";
@@ -158,7 +158,7 @@ if (limit == 1)
                 dialog_text += 
                 "\nCharles: Well done! Looks like you lost your files, though." +
                 "\nGood thing we made a backup!" +
-                "\nI knew copying all of your files without your permission would come in handy! I’ll send it to you now.\n" +
+                "\nI knew copying all of your files without your permission would come in handy! I’ll send it to you now.\n" + "\n" +
                 "\nReceived: backup.xml\n";
                 manual_text += "\nqoperation: This is a program" +
                 "\nthat sets up the" +
