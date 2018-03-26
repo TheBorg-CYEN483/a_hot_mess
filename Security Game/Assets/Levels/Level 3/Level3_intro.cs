@@ -86,7 +86,7 @@ public class Level3_intro : MonoBehaviour
         }
         if (scene == 4)
         {
-            SceneManager.LoadScene(("Level 3"));
+            SceneManager.LoadScene(("Logo"));
         }
     }
 

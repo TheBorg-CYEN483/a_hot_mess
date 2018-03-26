@@ -204,16 +204,16 @@ if (limit == 2 )
         shortened = input.Replace("qoperation ", "");
         if (split[1] == "drbackup" && split[2] == "-t" && split[3] == "Q_FULL")
         {
-                                       
+
+            Damaged_Filesystem.SetActive(false);
+            Folder_to_delete.SetActive(true);
+            FolderTab_to_delete.SetActive(true);                        
             dialog_text += 
                 "\nCharles: By the way, I also copied the English paper you had saved on here." +
                 "\nBut I also just saved you. So you kind of owe me anyway." +
                 "\nYou're welcome!";
-                Damaged_Filesystem.SetActive(false);
-                Folder_to_delete.SetActive(true);
-                FolderTab_to_delete.SetActive(true);
-               
-            chickendinner();
+           Invoke("chickendinner", 2);
+            
         }
     }
     }
@@ -246,7 +246,9 @@ if (limit == 2 )
 
     void chickendinner()
     { 
-    SceneManager.LoadScene(("Ending Badge"));  
+    //System.Threading.Thread.Sleep(5000);
+    SceneManager.LoadScene(("Ending Badge"));
+   
     }
 
     void manual()

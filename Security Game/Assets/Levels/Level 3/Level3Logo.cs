@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-
-public class Level3achievment : MonoBehaviour {
+public class Level3Logo : MonoBehaviour {
 
 	public Button rightButton;
 	public int scene = 0;
@@ -39,7 +38,7 @@ public class Level3achievment : MonoBehaviour {
         }
         if (scene == 1)
         {
-            SceneManager.LoadScene(("GoToLevel4"));
+            SceneManager.LoadScene(("Level 3"));
         }
     }
 
@@ -51,4 +50,3 @@ public class Level3achievment : MonoBehaviour {
         }
     }
 }
-
