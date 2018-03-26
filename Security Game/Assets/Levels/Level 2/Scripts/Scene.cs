@@ -10,7 +10,6 @@ public class Scene : MonoBehaviour
     public Button leftButton;
     public Text dialogue;
     private int page = 0;
-    // private Dictionary<int, Action> pageMethods;
     private List<string> openingDialogue = new List<string>() {
         "Charles: More locked doors. I guess we should have seen that coming. But it looks like this door is constantly receiving a signal to stay locked.",
         "Ada: The signal is going through a router, or access point, in the room. Problem is, there are several other signals going through the access point going to different places. I can't narrow down what IP the signal could be coming from.",

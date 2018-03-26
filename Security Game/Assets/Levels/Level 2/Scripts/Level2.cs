@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Level2 : MonoBehaviour
 {
     public InputField inputfield;
     public Text output_text;
-    // public string keyword = " ";
     public Text chat_man;
     public Button chatbutton;
     public Button manualbutton;
@@ -22,14 +22,6 @@ public class Level2 : MonoBehaviour
     private string ip = "192.168.1.103";
     private int linecounter = 0;
     private string ipRegex = @"((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(\.|$)){4}";
-
-    // public string openingDialog = "Charles: More locked doors. I guess we should have seen that coming. But it looks like this door is constantly receiving a signal to stay locked." +
-    //     "\nAda: The signal is going through a router, or access point, in the room. Problem is, there are several other signals going through the access point going to different places. I can't narrow down what IP the signal could be coming from." +
-    //     "\nCharles: I don't usually suggest this, but you will have to execute a Man-in-the-Middle attack to find, intercept, and modify the signal that is telling the door to stay locked." +
-    //     "\nAda: We should look for another option first. [Name] could get in a lot of trouble for doing that." +
-    //     "\nCharles: We don’t have that kind of time. Alan needs us. To do this, you need to find the IP address sending the signal that is keeping the door locked. Then, convince it to send the signal to your computer instead. When you receive the signal, modify it to unlock the door and send it to the access point. The tricky part is lying to both the access point and the door about where signals are coming from." +
-    //     "\nAda: Your understanding of this frightens me, but if you think [Name] can do it then I won’t argue. This time." +
-    //     "\nCharles: This is called a packet. Packets send information from one computer to the next. Think of packets like letters in the mail. They’re envelopes that carry information. When you use a tool like WireShark to view packets, you can see information about where the packet is going and who is sending it. It’s just like if you were looking at the destination address and the return address on an envelope. Viewing packets over a network like this is called packet sniffing.";
 
     void Start()
     {
@@ -46,8 +38,6 @@ public class Level2 : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return))
         {
             string input = inputfield.text;
-            // string shortened;
-
             List<string> tools = new List<string>() { "wireshark", "nmap", "set" };
             List<string> wireshark = new List<string>() { "-w", "-k" };
 
@@ -79,13 +69,11 @@ public class Level2 : MonoBehaviour
                             }
                             else
                             {
-                                Debug.Log("Turn on IPs on Packets");
                                 output_text.text += ">>  " + input + "\n";
                                 GameObject[] packets = GameObject.FindGameObjectsWithTag("Packet");
 
                                 for (int i = 0; i < packets.Length; i++)
                                 {
-                                    // packets[i].SetActive(true);
                                     packets[i].GetComponentInChildren<TextMesh>().text = packList[i].Source;
                                 }
                                 packet.SetActive(false);
@@ -103,14 +91,13 @@ public class Level2 : MonoBehaviour
                             }
                             else
                             {
-                                Debug.Log("Display packet infromation");
                                 output_text.text += ">>  " + input + "\n";
 
                                 for (int i = 0; i < packList.Count; i++)
                                 {
                                     if (packList[i].Source == ip)
                                     {
-                                        packet.GetComponentInChildren<TextMesh>().text = ip + " -> " + packList[i + 1].Source + "\n" + packList[i].Contents;
+                                        packet.GetComponentInChildren<TextMesh>().text = ip + "\n" + packList[i].Contents;
                                         break;
                                     }
                                 }
@@ -146,11 +133,15 @@ public class Level2 : MonoBehaviour
                         }
                         else
                         {
-                            Debug.Log("Change IP address");
                             output_text.text += ">>  " + input + "\n";
                             packet.SetActive(false);
                             ip = split[2];
                             ipAddress.text = " TERMINAL    IP: " + ip;
+
+                            if (packet.GetComponentInChildren<TextMesh>().text.Contains("COMMAND=UNLOCK"))
+                            {
+                                SceneManager.LoadScene("Level 2_Badge");
+                            }
                         }
                     }
                 }
@@ -182,8 +173,6 @@ public class Level2 : MonoBehaviour
                         {
                             string[] info = packet.GetComponentInChildren<TextMesh>().text.Split(' ');
                             string str = "";
-
-                            Debug.Log("Change 'Variable' on Packet to 'Value'");
                             output_text.text += ">>  " + input + "\n";
 
                             if (info[0].Contains(split[1]))

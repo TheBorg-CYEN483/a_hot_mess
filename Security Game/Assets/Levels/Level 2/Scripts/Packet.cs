@@ -6,8 +6,8 @@ public class Packet
 {
     private string source;
     private string contents;
-    private List<string> ipList = new List<string>() { "65.15.4.3", "102.3.75.1", "15.5.8.9", "10.0.0.5", "192.168.1.103", "192.168.7.8", "10.0.1.5", "192.168.7.4" };
-    private List<string> contentList = new List<string>() { "COMMAND = LOCK", "Google Search: Encrypt text", "Youtube Search: How to setup a router?", "10101001101010001010101010110", "www.google.com", "www.facebook.com", "ftue ue qzodkbfqp", "tuzf: geq efqsmzasdmbtk" };
+    private List<string> ipList = new List<string>() { "65.15.4.3", "102.3.75.1", "15.5.8.9", "10.0.0.5", "192.168.7.8", "10.0.1.5", "192.168.7.4" };
+    private List<string> contentList = new List<string>() { "COMMAND = LOCK", "Search: Encrypt text", "10101001101010001010101010110", "www.google.com", "www.facebook.com", "ftue ue qzodkbfqp", "tuzf: geq efqsmzasdmbtk" };
     private List<Packet> packetList = new List<Packet>();
 
     public string Source { get { return source; } }
