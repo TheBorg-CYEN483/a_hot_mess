@@ -16,24 +16,26 @@ public class Level4Intro : MonoBehaviour {
     public Button rightButton;
     public Image wall, floor, legr, legl, keyboard, monitor, computer, disk, power,table, panel;
     public int scene = 0;
+    public float time = 3;
         
 
 	// Use this for initialization
 	void Start () {
         rightButton.onClick.AddListener(() => goForward());
         leftButton.onClick.AddListener(() => goBackward());
+
     }
 	
 	// Update is called once per frame
 	void Update () {
-        string[] arraydialogue = { "Linus: Hey!How did you get in here? \nAda: I want to see what’s going on!Put me on Facetime!",
-        "Ada: Wait, Isn’t that Alan’s little brother? Charles: Since when is he an evil genius? He’s like ten.",
-        "Linus: You guys are always hogging him!He’s always in the basement hacking stuff with your stupid Super Secret"
-        + "Hacker Society, and he never even hangs out with me. You can’t have him back!He’s encrypted in a file on my computer! " +
+        string[] arraydialogue = { "Linus: Hey! How did you get in here? \nAda: I want to see what’s going on! Put me on Facetime!",
+        "Ada: Wait, Isn’t that Alan’s little brother? \nCharles: Since when is he an evil genius? He’s like ten.",
+        "Linus: You guys are always hogging him! He’s always in the basement hacking stuff with your stupid Super Secret"
+        + "Hacker Society, and he never even hangs out with me. You can’t have him back! He’s encrypted in a file on my computer! " +
         "I bet you don’t even know what encryption means!", "Linus: Encryption is when you take something in regular words, or " +
-        "plaintext, and turn it into something no one can read, known as a cipher.The only way to be able to read it again is to " +
+        "plaintext, and turn it into something no one can read, known as a cipher. The only way to be able to read it again is to " +
         "turn it back into plaintext. There are a lot of ways to turn plaintext into a cipher.", "Ada: Oh? Which one is your favorite? " +
-        "Linus : The Caesar Cipher, of course!It is the most well known cipher.", "Ada: Luckily for us we know all about encryption!Let’s find him!",
+        "\nLinus : The Caesar Cipher, of course! It is the most well known cipher.", "Ada: Luckily for us, we know all about encryption! Let’s find him!",
         "Charles: This is plaintext. You can easily see that the word is PIZZA. Now,"
         + " let’s turn this word into a cipher.", "Ada: Using a cipher wheel is a great way to help encrypt and decrypt"
         + " messages. All you have to do for a caesar cipher is shift the alphabet. In this instance, the red letters are"
@@ -46,8 +48,13 @@ public class Level4Intro : MonoBehaviour {
         " place to start with ciphers like these (when you don’t know how many places to shift the alphabet) is to remember" +
         " common words in your language as well as common letters. Remember: Every word must have a vowel in it and only" +
         " certain letters can be by themselves."};
-        dialogue.text = arraydialogue[scene];
 
+        if (scene < 11)
+        {
+            dialogue.text = arraydialogue[scene];
+        }
+        Debug.Log(scene);
+        
 
         if (scene == 0)
         {
@@ -57,10 +64,9 @@ public class Level4Intro : MonoBehaviour {
         {
             leftButton.interactable = true;
         }
-           
-        if(scene == 6)
-        {
 
+        if (scene == 6)
+        {
             leftButton.interactable = false;
             rightButton.interactable = true;
             panel.color = new Color(255, 255, 255, 255);
@@ -79,9 +85,8 @@ public class Level4Intro : MonoBehaviour {
             cipheralpha.color = new Color(0, 255, 0, 0);
             plainalpha.color = new Color(0, 255, 0, 0);
             panel.color = new Color(0, 0, 0, 255);
-
         }
-        else if (scene == 8)
+        else if (scene == 7)
         {
             cipheralpha.text = "a b c d e f g h i j k l m n o p q r s t u v w x y z";
             leftButton.interactable = true;
@@ -91,7 +96,7 @@ public class Level4Intro : MonoBehaviour {
             cipheralpha.color = new Color(0, 255, 0, 255);
             plainalpha.color = new Color(255, 0, 0, 255);
         }
-        else if(scene == 9)
+        else if (scene == 8)
         {
             cipheralpha.text = "h i j k l m n o p q r s t u v w x y z a b c d e f g";
             leftButton.interactable = true;
@@ -101,7 +106,7 @@ public class Level4Intro : MonoBehaviour {
             cipheralpha.color = new Color(0, 255, 0, 255);
             plainalpha.color = new Color(255, 0, 0, 255);
         }
-        else if(scene == 10)
+        else if (scene == 9)
         {
             //cipheralpha.text = "a b c d e f g h i j k l m n o p q r s t u v w x y z";
             leftButton.interactable = true;
@@ -109,12 +114,6 @@ public class Level4Intro : MonoBehaviour {
             plaintext.color = new Color(0, 255, 0, 255);
             ciphertext.color = new Color(255, 0, 0, 255);
         }
-        else if (scene == 11)
-        {
-
-        }
-
-		
 	}
 
     void goForward()
@@ -123,7 +122,7 @@ public class Level4Intro : MonoBehaviour {
         {
             scene += 1;
         }
-        if (scene == 11)
+        if(scene == 11)
         {
             SceneManager.LoadScene(("Level 4"));
         }

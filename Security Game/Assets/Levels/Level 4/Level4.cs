@@ -17,10 +17,12 @@ public class Level4 : MonoBehaviour
     public Text plaintext_alphabet;
     public Text ciphertext_alphabet;
     public Text chat_man;
+    public Text Level_4;
     public Button chatbutton;
     public Button manualbutton;
     public Button shiftbutton;
     public Button right_button;
+    public Image blackoutScreen;
     public int temp = 0;
     public string plain = "";
     public string compare = "";
@@ -58,6 +60,8 @@ cryptographer  no one will ever decipher this ";
         manualbutton.onClick.AddListener(() => manual());           //manual button
         shiftbutton.onClick.AddListener(() => shift_alphabet());
         right_button.onClick.AddListener(() => goForward());
+        Destroy(Level_4, 3);
+        Destroy(blackoutScreen, 3);
 
 
         int new_crypto = rnd.Next(1, 25);                           //create a random number
