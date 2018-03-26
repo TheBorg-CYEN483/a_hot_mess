@@ -40,6 +40,7 @@ public class Level4_2 : MonoBehaviour {
         string[] input_parse = input_text.Split(' ');
         if (Input.GetKeyDown(KeyCode.Return))
         {
+
             if(input_parse[0] == "sudo")
             {
                 if (input_parse[1] == "find")
@@ -114,7 +115,8 @@ public class Level4_2 : MonoBehaviour {
             {
                 output_text.text = "This file is password protected.";
             }
-            
+            inputfield.text = "";
+            inputfield.ActivateInputField();
         }
 
 	}
@@ -124,17 +126,19 @@ public class Level4_2 : MonoBehaviour {
         
     }
 
+    
     void chat()
     {
         chat_man.text = "Charles: Great! We got the password! We don't know what it goes to yet,"
-    +  "but I think right now we just need to access their file system and FIND Alan. Ada, don't we"
-    + "have a command for that? \nAda: Shh, Charles. They know how to use the manual. Let them figure it out.";
+    +  " but I think right now we just need to access their file system and FIND Alan. Ada, don't we"
+    + "have a command for that? \n\nAda: Shh, Charles. They know how to use the manual. Let them figure it out.";
     }
     
     void manual()
     {
         chat_man.text = "sudo: gives administrative privileges \n \nfind: searches the file system for a file \n \n-iname:"
             + " a parameter for 'find' to allow it to ignore how the file name is typed \n\ncd: when followed by the folder name,"
-            + "cd allows you to go to that folder\n \n '\\' + space: allows you to have spaces in a file name. \nex: cd Funny\\ Pictures";
+            + "cd allows you to go to that folder\n \n '\\' + space: allows you to have spaces in a file name. \nex: cd Funny\\ Pictures" 
+            + "\n\nopen: opens a file \n\n-p: allows you to type a password after the file name when using the 'open' command";
     }
 }
