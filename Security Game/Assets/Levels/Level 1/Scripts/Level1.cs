@@ -19,7 +19,8 @@ public class Level1 : MonoBehaviour {
 	private int currChatPane = 0;
 
 
-	// Terminal, Manual, Dialogue UI elements
+	// Terminal, Manual, Dialogue, etc. UI elements
+	public GameObject levelScreen;
 	public InputField inputfield;
 	public Text output_text;
 	public Text player_assistance_text;
@@ -27,6 +28,15 @@ public class Level1 : MonoBehaviour {
 	public Button manualbutton;
 	public Button advanceChat;
 	public Button retractChat;
+	private int linecounter = 0;
+	public Scrollbar scroller;
+
+	// Dynamic Objects in Scene
+	public List<GameObject> clients;
+	public GameObject router;			// for collider use
+	public GameObject MACbox;
+	public GameObject captureTank;
+	public GameObject crackWindow;
 
 	// Use this for initialization
 	void Start()
@@ -37,9 +47,9 @@ public class Level1 : MonoBehaviour {
 		switchToChat ();
 
 		// Initialise GameObjects for Level
-		sceneObjects = new List<GameObject>[scenePhaseCount];
-		for (var i = 0; i < scenePhaseCount; i++) { 	sceneObjects[i] = new List<GameObject> (); 		}
-		initSceneObjectsList (sceneObjects);
+	//	sceneObjects = new List<GameObject>[scenePhaseCount];
+	//	for (var i = 0; i < scenePhaseCount; i++) { 	sceneObjects[i] = new List<GameObject> (); 		}
+	//	initSceneObjectsList (sceneObjects);
 
 
 		// UI Buttons
@@ -52,6 +62,10 @@ public class Level1 : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+		if (levelScreen.activeSelf && Input.GetMouseButtonDown (0))
+			levelScreen.SetActive (false);
+			
+
 		string input = inputfield.text;
 
 		if (Input.GetKeyDown(KeyCode.Return))
@@ -63,7 +77,7 @@ public class Level1 : MonoBehaviour {
 	}
 
 
-
+	// not Unity-esque enough
 	static void initSceneObjectsList(List<GameObject>[] target)
 	{
 		List<GameObject> objsToDraw = new List<GameObject>(); 	
@@ -86,10 +100,13 @@ public class Level1 : MonoBehaviour {
 
 	void drawScene(int i)
 	{
+		/*
 		foreach (GameObject ob in sceneObjects[i]) 
 		{
+			// temp logging
 			terminalLog (ob.ToString () + ob.transform.position);
 		}
+		*/
 	}
 
 	void incremenetScenePhase()
@@ -160,10 +177,14 @@ public class Level1 : MonoBehaviour {
 		{
 			"airmon-ng start wlan0", 
 			"airodump-ng --bssid 80:2a:a8:17:74:b5 -w captureFile wlan0",
-			"aircrack-ng -w weakPasswordList -b 80:2a:a8:17:74:b5 captureFile",
-			"password: thebestpassword"
+			"aircrack-ng -w weakPasswordList -b 80:2a:a8:17:74:b5 captureFile"
 		};
 
+		linecounter += 1;
+		if (linecounter > 4)
+		{
+			scroller.value -= (float).06;
+		}
 
 		terminalLog(">>  " + input);
 		List<string> inputTokens = input.Split(' ').ToList();
@@ -183,7 +204,7 @@ public class Level1 : MonoBehaviour {
 		switch(currSceneProgress)
 		{
 		case 0:
-			terminalLog ("Monitoring mode started. Show broadcasts and AP MAC");
+			Debug.Log ("Monitoring mode started. Show broadcasts and AP MAC");
 			break;
 		case 1:
 			terminalLog ("Handshake captured on wlan0. Data stored in captureFile.pak");
