@@ -32,7 +32,7 @@ public class Login : MonoBehaviour
             // SceneManager.LoadScene("Level 0");
         }
         // else if (Login credentials match existing user) {
-        //		Load level user was on
+        //		SceneManager.LoadScene(PlayerPrefs.GetString("Level"));
         // }
         else
         {

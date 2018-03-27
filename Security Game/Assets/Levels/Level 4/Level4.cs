@@ -170,14 +170,14 @@ cryptographer  no one will ever decipher this ";
     void chat()
     {
         chat_man.text = @"Charles: This is plaintext. You can easily see that the word is PIZZA. Now,"
-                + " let’s turn this word into a cipher.\nAda: Using a cipher wheel is a great way to help encrypt and decrypt"
+                + " let’s turn this word into a cipher.\n\nAda: Using a cipher wheel is a great way to help encrypt and decrypt"
                 + " messages. All you have to do for a caesar cipher is shift the alphabet. In this instance, the red letters are"
-                + " the letters of the plain message and the green letters are the letters of the coded text.\n Ada: We have shifted the "
+                + " the letters of the plain message and the blue letters are the letters of the coded text.\n\n Ada: We have shifted the "
                 + "alphabet 7 letters. If the coded message is made by shifting 7 letters, the only way to make the message readable"
-                + " again is to shift it back 7 letters.\nCharles: After shifting the alphabet 7 places, the letter ‘A’ becomes" +
-                 " ‘T’, ‘B’ becomes ‘U’, and so on. Now the encrypting begins. Just match the original message PIZZA to the letters" +
-                 " of the inner wheel. ‘P’ becomes ‘I’, ‘I’ becomes ‘B’, ‘Z’ becomes ‘S’, and ‘A’ becomes ‘T’. Oh, man, all this talk" +
-                 " of pizza is making me hungry.\nAda: It looks like Charles found a coded message that we need to decrypt using a Caesar Cipher. A good" +
+                + " again is to shift it back 7 letters.\n\nCharles: After shifting the alphabet 7 places, the letter ‘A’ becomes" +
+                 " ‘T’, ‘B’ becomes ‘U’, and so on. Now the encrypting begins. Just match the original message PIZZA to the letters in blue" +
+                 ". ‘P’ becomes ‘I’, ‘I’ becomes ‘B’, ‘Z’ becomes ‘S’, and ‘A’ becomes ‘T’. Oh, man, all this talk" +
+                 " of pizza is making me hungry.\n\nAda: It looks like Charles found a coded message that we need to decrypt using a Caesar Cipher. A good" +
                  " place to start with ciphers like these (when you don’t know how many places to shift the alphabet) is to remember" +
                  " common words in your language as well as common letters. Remember: Every word must have a vowel in it and only" +
                  " certain letters can be by themselves.";
@@ -185,7 +185,7 @@ cryptographer  no one will ever decipher this ";
 
     void manual()
     {
-        chat_man.text = "Syntax: \n\n cipherletter > plaintextletter";
+        chat_man.text = "In order to change a letter, you have to type: \n\ncipher letter > plain letter";
     }
 
     void shift_alphabet()

@@ -15,6 +15,7 @@ public class Level4Intro : MonoBehaviour {
     public Button leftButton;
     public Button rightButton;
     public Image wall, floor, legr, legl, keyboard, monitor, computer, disk, power,table, panel;
+    public Image solitaire;
     public int scene = 0;
     public float time = 3;
         
@@ -31,7 +32,7 @@ public class Level4Intro : MonoBehaviour {
         string[] arraydialogue = { "Linus: Hey! How did you get in here? \nAda: I want to see what’s going on! Put me on Facetime!",
         "Ada: Wait, Isn’t that Alan’s little brother? \nCharles: Since when is he an evil genius? He’s like ten.",
         "Linus: You guys are always hogging him! He’s always in the basement hacking stuff with your stupid Super Secret"
-        + "Hacker Society, and he never even hangs out with me. You can’t have him back! He’s encrypted in a file on my computer! " +
+        + " Hacker Society, and he never even hangs out with me. You can’t have him back! He’s encrypted in a file on my computer! " +
         "I bet you don’t even know what encryption means!", "Linus: Encryption is when you take something in regular words, or " +
         "plaintext, and turn it into something no one can read, known as a cipher. The only way to be able to read it again is to " +
         "turn it back into plaintext. There are a lot of ways to turn plaintext into a cipher.", "Ada: Oh? Which one is your favorite? " +
@@ -39,14 +40,14 @@ public class Level4Intro : MonoBehaviour {
         "Charles: This is plaintext. You can easily see that the word is PIZZA. Now,"
         + " let’s turn this word into a cipher.", "Ada: Using a cipher wheel is a great way to help encrypt and decrypt"
         + " messages. All you have to do for a caesar cipher is shift the alphabet. In this instance, the red letters are"
-        + " the letters of the plain message and the green letters are the letters of the coded text.", "Ada: We have shifted the "
+        + " the letters of the plain message and the blue letters are the letters of the coded text.", "Ada: We have shifted the "
         + "alphabet 7 letters. If the coded message is made by shifting 7 letters, the only way to make the message readable" 
         +" again is to shift it back 7 letters.", "Charles: After shifting the alphabet 7 places, the letter ‘A’ becomes" +
-        " ‘T’, ‘B’ becomes ‘U’, and so on. Now the encrypting begins. Just match the original message PIZZA to the letters" +
-        " of the inner wheel. ‘P’ becomes ‘I’, ‘I’ becomes ‘B’, ‘Z’ becomes ‘S’, and ‘A’ becomes ‘T’. Oh, man, all this talk" +
+        " ‘T’, ‘B’ becomes ‘U’, and so on. Now the encrypting begins. Just match the original message PIZZA to the blue letters" +
+        ". ‘P’ becomes ‘I’, ‘I’ becomes ‘B’, ‘Z’ becomes ‘S’, and ‘A’ becomes ‘T’. Oh, man, all this talk" +
         " of pizza is making me hungry.", "Ada: It looks like Charles found a coded message that we need to decrypt using a Caesar Cipher. A good" +
         " place to start with ciphers like these (when you don’t know how many places to shift the alphabet) is to remember" +
-        " common words in your language as well as common letters. Remember: Every word must have a vowel in it and only" +
+        " common words in the English language as well as common letters. Remember: Every word must have a vowel in it and only" +
         " certain letters can be by themselves."};
 
         if (scene < 11)
@@ -80,39 +81,40 @@ public class Level4Intro : MonoBehaviour {
             disk.color = new Color(0, 0, 0, 0);
             power.color = new Color(0, 0, 0, 0);
             table.color = new Color(0, 0, 0, 0);
-            plaintext.color = new Color(0, 255, 0, 255);
-            ciphertext.color = new Color(255, 0, 0, 0);
-            cipheralpha.color = new Color(0, 255, 0, 0);
-            plainalpha.color = new Color(0, 255, 0, 0);
+            plaintext.color = new Color(255, 0, 0, 255);
+            ciphertext.color = new Color(0, 255, 255, 0);
+            cipheralpha.color = new Color(0, 255, 255, 0);
+            plainalpha.color = new Color(255, 0, 0, 0);
             panel.color = new Color(0, 0, 0, 255);
+            solitaire.color = new Color(255, 255, 255, 0);
         }
         else if (scene == 7)
         {
             cipheralpha.text = "a b c d e f g h i j k l m n o p q r s t u v w x y z";
             leftButton.interactable = true;
             rightButton.interactable = true;
-            plaintext.color = new Color(0, 255, 0, 0);
+            plaintext.color = new Color(255, 0, 0, 0);
             ciphertext.color = new Color(255, 0, 0, 0);
-            cipheralpha.color = new Color(0, 255, 0, 255);
-            plainalpha.color = new Color(255, 0, 0, 255);
+            cipheralpha.color = new Color(255, 0, 0, 255);
+            plainalpha.color = new Color(0, 255, 255, 255);
         }
         else if (scene == 8)
         {
             cipheralpha.text = "h i j k l m n o p q r s t u v w x y z a b c d e f g";
             leftButton.interactable = true;
             rightButton.interactable = true;
-            plaintext.color = new Color(0, 255, 0, 0);
+            plaintext.color = new Color(0, 255, 255, 0);
             ciphertext.color = new Color(255, 0, 0, 0);
-            cipheralpha.color = new Color(0, 255, 0, 255);
-            plainalpha.color = new Color(255, 0, 0, 255);
+            cipheralpha.color = new Color(255, 0, 0, 255);
+            plainalpha.color = new Color(0, 255, 255, 255);
         }
         else if (scene == 9)
         {
             //cipheralpha.text = "a b c d e f g h i j k l m n o p q r s t u v w x y z";
             leftButton.interactable = true;
             rightButton.interactable = true;
-            plaintext.color = new Color(0, 255, 0, 255);
-            ciphertext.color = new Color(255, 0, 0, 255);
+            plaintext.color = new Color(255, 0, 0, 255);
+            ciphertext.color = new Color(0, 255, 255, 255);
         }
 	}
 
