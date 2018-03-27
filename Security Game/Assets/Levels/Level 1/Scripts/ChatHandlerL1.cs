@@ -38,8 +38,8 @@ namespace AssemblyCSharp
 
 			chatPanes.Add ("Charles: That must be it! Go type it in!");
 
-			chatPanes.Add ("Charles: Now that you’re on the network, the door unlocked to let you through! " +
-			"Keep going, and be careful! Who knows what they might do to you if they find out you hacked into their network.");
+			//chatPanes.Add ("Charles: Now that you’re on the network, the door unlocked to let you through! " +
+			//"Keep going, and be careful! Who knows what they might do to you if they find out you hacked into their network.");
 
 		}
 

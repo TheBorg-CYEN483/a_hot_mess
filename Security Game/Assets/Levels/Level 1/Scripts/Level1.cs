@@ -9,10 +9,9 @@ using AssemblyCSharp; 	// for the inclusion of helper classes
 public class Level1 : MonoBehaviour {
 
 	// Progress Tracking
-	private static GameObject displayContainer;
+	//private static GameObject displayContainer;
 	private static int scenePhaseCount = 5;
 	private int currSceneProgress = 0;
-	private List<GameObject>[] sceneObjects;
 
 	// Chat Data Repo
 	private ChatHandlerL1 chatHandler;
@@ -32,9 +31,9 @@ public class Level1 : MonoBehaviour {
 	public Scrollbar scroller;
 
 	// Dynamic Objects in Scene
-	public List<GameObject> clients;
-	public GameObject router;			// for collider use
+	public List<GameObject> nodes;
 	public GameObject MACbox;
+	private BroadcastHandler bcastHandler;
 	public GameObject captureTank;
 	public GameObject crackWindow;
 
@@ -42,15 +41,10 @@ public class Level1 : MonoBehaviour {
 	void Start()
 	{
 		// Utility Reference
-		displayContainer = this.gameObject; 	
+		//displayContainer = this.gameObject; 	
 		chatHandler = new ChatHandlerL1 ();
 		switchToChat ();
-
-		// Initialise GameObjects for Level
-	//	sceneObjects = new List<GameObject>[scenePhaseCount];
-	//	for (var i = 0; i < scenePhaseCount; i++) { 	sceneObjects[i] = new List<GameObject> (); 		}
-	//	initSceneObjectsList (sceneObjects);
-
+		bcastHandler = new BroadcastHandler (nodes);
 
 		// UI Buttons
 		chatbutton.onClick.AddListener(() => switchToChat());
@@ -62,10 +56,10 @@ public class Level1 : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
+		// level splash screen, active removal
 		if (levelScreen.activeSelf && Input.GetMouseButtonDown (0))
 			levelScreen.SetActive (false);
-			
-
+		
 		string input = inputfield.text;
 
 		if (Input.GetKeyDown(KeyCode.Return))
@@ -77,54 +71,86 @@ public class Level1 : MonoBehaviour {
 	}
 
 
-	// not Unity-esque enough
-	static void initSceneObjectsList(List<GameObject>[] target)
+
+	void parseInput(string input)
 	{
-		List<GameObject> objsToDraw = new List<GameObject>(); 	
-
-
-		GameObject go = new GameObject ("Reference Sprite");
-		Image im = go.AddComponent<Image> ();
-		im.sprite = Resources.Load<Sprite>("Client_White-Full");
-		im.color = Color.green;
-
-
-		objsToDraw.Add (go);
-
-		// make each object in the reference list a child of UI master container
-		foreach (GameObject obj in objsToDraw)
+		// basic setup for solution structure
+		List<string> solutions = new List<string>()
 		{
-			target[0].Add( Instantiate (obj, displayContainer.transform));
-		}
-	}
+			"airmon-ng start wlan0", 
+			"airodump-ng --bssid 80:2a:a8:17:74:b5 -w captureFile wlan0",
+			"aircrack-ng -w weakPasswordList -b 80:2a:a8:17:74:b5 captureFile"
+		};
 
-	void drawScene(int i)
-	{
-		/*
-		foreach (GameObject ob in sceneObjects[i]) 
+
+		terminalLog(">>  " + input);
+		List<string> inputTokens = input.Split(' ').ToList();
+
+		// crude ordered solution check; bad for detailed feedback
+		for (var j = 0; j < inputTokens.Count; j++) 
 		{
-			// temp logging
-			terminalLog (ob.ToString () + ob.transform.position);
+			if (solutions [currSceneProgress].Split () [j] != inputTokens [j]) 
+			{
+				terminalLog ("Input Error");
+				return;
+			}
 		}
-		*/
+
+		// correct command entered
+		incremenetScenePhase ();
 	}
 
 	void incremenetScenePhase()
 	{
 		currSceneProgress++;
 		incrementChatPage ();
-		drawScene (currSceneProgress);
+
+		// Output description in the terminal output
+		// Draw objects relevant to current task
+		switch(currSceneProgress)
+		{
+		case 0:
+			terminalLog ("Monitoring mode started. Showing broadcasts and AP MAC");
+			MACbox.SetActive (true);
+			captureTank.SetActive (true);
+			bcastHandler.toggleBroadcastVis ();
+			break;
+		case 1:
+			terminalLog ("Handshake captured on wlan0. Data stored in captureFile.pak");
+			// render captured broadcast in tank
+			break;
+		case 2:
+			terminalLog ("Cracking WPA key from captureFile.pak, weakPasswordList");
+			// unrender nodes
+			// move tank
+			// render crackwindow
+			break;
+
+			// wait for completion
+			// switch scene to Level 1 Exit
+
+			// todo, remove this last case for final implementation
+		case 3:
+			terminalLog ("Password Accepted; Level Solved");
+			break;
+		}
 	}
 
 	void incrementChatPage()
 	{
+		retractChat.gameObject.SetActive (true);
 		currChatPane = Mathf.Min(currChatPane + 1, chatHandler.getPaneCount() - 1);
+		if (currChatPane >= currSceneProgress)
+			advanceChat.gameObject.SetActive (false);
 		switchToChat ();
 	}
 
 	void decrementChatPage()
 	{
+		advanceChat.gameObject.SetActive (true);
 		currChatPane = Mathf.Max(0, currChatPane - 1);
+		if (currChatPane == 0)
+			retractChat.gameObject.SetActive (false);
 		switchToChat ();
 	}
 
@@ -140,7 +166,7 @@ public class Level1 : MonoBehaviour {
 			"\n\n<start\\stop>\n    The first argument tells the script whether to start or stop monitoring mode"+
 			"\n<interface>\n    The second argument tells the script what wireless interface you want to use."+
 			"\n    You just have access to wlan0.";
-		
+
 
 		player_assistance_text.text += 
 			"\n\n\n\nairodump-ng: a tool for capturing segments of wireless broadcasts in the aircrack-ng suite"+
@@ -161,62 +187,11 @@ public class Level1 : MonoBehaviour {
 	void terminalLog(string str)
 	{
 		output_text.text += str + "\n";
-	}
-
-	void parseInput(string input)
-	{
-		// temporary trigger
-		if (input == "") 
-		{
-			drawScene (currSceneProgress);
-			return;
-		}
-
-		// basic setup for solution structure
-		List<string> solutions = new List<string>()
-		{
-			"airmon-ng start wlan0", 
-			"airodump-ng --bssid 80:2a:a8:17:74:b5 -w captureFile wlan0",
-			"aircrack-ng -w weakPasswordList -b 80:2a:a8:17:74:b5 captureFile"
-		};
 
 		linecounter += 1;
 		if (linecounter > 4)
 		{
 			scroller.value -= (float).06;
 		}
-
-		terminalLog(">>  " + input);
-		List<string> inputTokens = input.Split(' ').ToList();
-
-		// crude ordered solution check; bad for detailed feedback
-		for (var j = 0; j < inputTokens.Count; j++) 
-		{
-			if (solutions [currSceneProgress].Split () [j] != inputTokens [j]) 
-			{
-				terminalLog ("Input Error");
-				return;
-			}
-		}
-
-		// Return output based on successful check
-		//  Temporary Description in the terminal output
-		switch(currSceneProgress)
-		{
-		case 0:
-			Debug.Log ("Monitoring mode started. Show broadcasts and AP MAC");
-			break;
-		case 1:
-			terminalLog ("Handshake captured on wlan0. Data stored in captureFile.pak");
-			break;
-		case 2:
-			terminalLog ("Cracking WPA key from captureFile.pak, weakPasswordList");
-			break;
-		case 3:
-			terminalLog ("Password Accepted; Level Solved");
-			break;
-		}
-
-		incremenetScenePhase ();
 	}
 }
