@@ -68,10 +68,10 @@ public class Level3_intro : MonoBehaviour
     string[] dialogue_array = 
 			{"Ada: Hey, it looks like your computer is acting funny. Did you screw it up?\n" +
             "Charles: I bet his computer was hacked. Maybe you should look for malware.", 
-			"Malware is any program that do not want, need, or ask for.\n", 
+			"Malware is any program that you do not want, need, or ask for.\n", 
             "Ada: We’re going to send some software to you. \nIt’s called MalChecker, and it will scan your files for malware.\n" +
             "Charles: This is what malware looks like.\n",
-            "Charles: Malchecker is sort of like using a flashlight in a dark room to look for monsters. In this case, the monsters are malware." +
+            "Charles: Malchecker is sort of like using a flashlight in a dark room to look for monsters. In this case, the monsters are malware. " +
 			"So the MalChecker will show us where the malware is hiding in your folders.", ""};
    
 
