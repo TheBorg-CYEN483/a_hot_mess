@@ -14,7 +14,6 @@ public class Level1_Intro : MonoBehaviour
 	public GameObject broadcast;
 	public GameObject connectionText;
 	private int page = 0;
-	private bool activate = false;
 	private Dictionary<int, Action> pageMethods;
 	private List<string> openingDialogue = new List<string>() {
 		"Ada: Okay, so you're in the tower now. Looks like you only have one door to go through. That should be easy, right?",

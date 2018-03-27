@@ -3,26 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
-using AssemblyCSharp; 	// for the inclusion of helper classes
 
 
-public class Level1 : MonoBehaviour {
+public class Level1 : MonoBehaviour
+{
+	// Teaching Elements, Progression Data, Dynamic Elements
+	private ProgressHandlerL1 progressHandler;
 
-	// Progress Tracking
-	//private static GameObject displayContainer;
-	private static int scenePhaseCount = 5;
-	private int currSceneProgress = 0;
-
-	// Chat Data Repo
-	private ChatHandlerL1 chatHandler;
-	private int currChatPane = 0;
-
-
-	// Terminal, Manual, Dialogue, etc. UI elements
+	// Terminal, Buttons, etc. Interactable UI elements
 	public GameObject levelScreen;
 	public InputField inputfield;
 	public Text output_text;
-	public Text player_assistance_text;
 	public Button chatbutton;
 	public Button manualbutton;
 	public Button advanceChat;
@@ -32,8 +23,8 @@ public class Level1 : MonoBehaviour {
 
 	// Dynamic Objects in Scene
 	public List<GameObject> nodes;
+	public Text player_assistance_text;
 	public GameObject MACbox;
-	private BroadcastHandler bcastHandler;
 	public GameObject captureTank;
 	public GameObject crackWindow;
 
@@ -41,16 +32,16 @@ public class Level1 : MonoBehaviour {
 	void Start()
 	{
 		// Utility Reference
-		//displayContainer = this.gameObject; 	
-		chatHandler = new ChatHandlerL1 ();
-		switchToChat ();
-		bcastHandler = new BroadcastHandler (nodes);
+		progressHandler = new ProgressHandlerL1 (	nodes, MACbox, captureTank, crackWindow,
+			player_assistance_text, advanceChat, retractChat);	
 
 		// UI Buttons
-		chatbutton.onClick.AddListener(() => switchToChat());
-		manualbutton.onClick.AddListener(() => switchToManual());
-		advanceChat.onClick.AddListener(() => incrementChatPage ());
-		retractChat.onClick.AddListener(() => decrementChatPage ());
+		chatbutton.onClick.AddListener(() => progressHandler.switchToChat());
+		manualbutton.onClick.AddListener(() => progressHandler.switchToManual());
+		advanceChat.onClick.AddListener(() => progressHandler.incrementChatPage ());
+		retractChat.onClick.AddListener(() => progressHandler.decrementChatPage ());
+
+		progressHandler.switchToChat ();
 	}
 
 	// Update is called once per frame
@@ -71,7 +62,6 @@ public class Level1 : MonoBehaviour {
 	}
 
 
-
 	void parseInput(string input)
 	{
 		// basic setup for solution structure
@@ -89,41 +79,31 @@ public class Level1 : MonoBehaviour {
 		// crude ordered solution check; bad for detailed feedback
 		for (var j = 0; j < inputTokens.Count; j++) 
 		{
-			if (solutions [currSceneProgress].Split () [j] != inputTokens [j]) 
+			if (solutions [progressHandler.getCurrentPhase()].Split () [j] != inputTokens [j]) 
 			{
 				terminalLog ("Input Error");
 				return;
 			}
 		}
 
-		// correct command entered
+		// correct command entered, so:
 		incremenetScenePhase ();
 	}
 
+	// Output description in the terminal output
+	// Use progressHandler to track progress and updaste objects
 	void incremenetScenePhase()
 	{
-		currSceneProgress++;
-		incrementChatPage ();
-
-		// Output description in the terminal output
-		// Draw objects relevant to current task
-		switch(currSceneProgress)
+		switch(progressHandler.getCurrentPhase())
 		{
 		case 0:
 			terminalLog ("Monitoring mode started. Showing broadcasts and AP MAC");
-			MACbox.SetActive (true);
-			captureTank.SetActive (true);
-			bcastHandler.toggleBroadcastVis ();
 			break;
 		case 1:
 			terminalLog ("Handshake captured on wlan0. Data stored in captureFile.pak");
-			// render captured broadcast in tank
 			break;
 		case 2:
 			terminalLog ("Cracking WPA key from captureFile.pak, weakPasswordList");
-			// unrender nodes
-			// move tank
-			// render crackwindow
 			break;
 
 			// wait for completion
@@ -134,56 +114,30 @@ public class Level1 : MonoBehaviour {
 			terminalLog ("Password Accepted; Level Solved");
 			break;
 		}
+		progressHandler.incremenetScenePhase ();
 	}
 
-	void incrementChatPage()
-	{
-		retractChat.gameObject.SetActive (true);
-		currChatPane = Mathf.Min(currChatPane + 1, chatHandler.getPaneCount() - 1);
-		if (currChatPane >= currSceneProgress)
-			advanceChat.gameObject.SetActive (false);
-		switchToChat ();
-	}
+	// Activate scene changes with progHandler and Change Button Accessibility
+//	void incrementChatPage()
+//	{
+//		progressHandler.incrementChatPage ();
+//
+//		retractChat.gameObject.SetActive (true);
+//		if (progressHandler.getCurrentPane() >= progressHandler.getCurrentPhase())
+//			advanceChat.gameObject.SetActive (false);
+//	}
+//
+//	// Activate scene changes with progHandler and Change Button Accessibility
+//	void decrementChatPage()
+//	{
+//		progressHandler.decrementChatPage ();
+//
+//		advanceChat.gameObject.SetActive (true);
+//		if (progressHandler.getCurrentPane() == 0)
+//			retractChat.gameObject.SetActive (false);
+//	}
 
-	void decrementChatPage()
-	{
-		advanceChat.gameObject.SetActive (true);
-		currChatPane = Mathf.Max(0, currChatPane - 1);
-		if (currChatPane == 0)
-			retractChat.gameObject.SetActive (false);
-		switchToChat ();
-	}
-
-	void switchToChat()
-	{
-		player_assistance_text.text = chatHandler.getChatPane (currChatPane);
-	}
-
-	void switchToManual()
-	{
-		player_assistance_text.text = 
-			"airmon-ng: a script to switch your wireless interface between modes"+
-			"\n\n<start\\stop>\n    The first argument tells the script whether to start or stop monitoring mode"+
-			"\n<interface>\n    The second argument tells the script what wireless interface you want to use."+
-			"\n    You just have access to wlan0.";
-
-
-		player_assistance_text.text += 
-			"\n\n\n\nairodump-ng: a tool for capturing segments of wireless broadcasts in the aircrack-ng suite"+
-			"\n\n--bssid <MAC address>\n    This option tells the program to only consider conections running through the given MAC address"+
-			"\n-w <file prefix>\n    This option tells the program to output captured data to files starting with the given prefix"+
-			"\nYou can name this as you please."+
-			"\n<interface>\n    This argument tells the program which interface (in monitoring mode) it should use to capture data";
-
-		player_assistance_text.text += 
-			"\n\n\n\naircrack-ng: key cracking program for the connection protocol in use" +
-			"\n\n-w <word list>\n    This is the dictionary of bad passwords the program will use in cracking the network key" +
-			"\nYour friends have provided you with the file weakPasswordList." +
-			"\n-b <MAC address>\n    This argument specifies that the target network is running on the given MAC address" +
-			"\n<captured file(s)>\n    This argument, a file or set of files, tells the program what to analyse and crack" +
-			"\nThis corresponds to the file prefix you specified earlier.";
-	}
-
+	// Output string to Terminal with autoscroll
 	void terminalLog(string str)
 	{
 		output_text.text += str + "\n";
@@ -191,7 +145,7 @@ public class Level1 : MonoBehaviour {
 		linecounter += 1;
 		if (linecounter > 4)
 		{
-			scroller.value -= (float).06;
+			scroller.value -= (float).065;
 		}
 	}
 }
