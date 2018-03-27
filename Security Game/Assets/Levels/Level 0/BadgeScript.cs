@@ -21,5 +21,6 @@ public class BadgeScript : MonoBehaviour {
     void goForward()
     {
         SceneManager.LoadScene(("Level0EndScene"));
+        PlayerPrefs.SetString("Level", "Level0EndScene");
     }
 }
