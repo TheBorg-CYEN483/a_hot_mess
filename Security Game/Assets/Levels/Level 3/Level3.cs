@@ -41,7 +41,7 @@ public class Level3  : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         inputfield.ActivateInputField();
+        inputfield.ActivateInputField();  
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
        
         if (limit == 0)
@@ -81,7 +81,7 @@ public class Level3  : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return))
         {
             output_text.text += ">>  " + input + "\n";
-        
+            inputfield.text = "";
         if (limit == 0)
         {           
           if (split[0] == "MalChecker")
@@ -135,6 +135,7 @@ if (limit == 1)
    
     if(Input.GetKeyDown(KeyCode.Return))
     {
+        inputfield.text = "";
         if (split[0] == "rm")
         {
             if(split.Length == 3)
@@ -174,6 +175,7 @@ if (limit == 1)
 }
 if (Input.GetKeyDown(KeyCode.Return))
 {
+    inputfield.text = "";
 if (limit == 2 )
 {
     if(split.Length == 4)
@@ -230,15 +232,14 @@ if (limit == 2 )
 
     void manual()
     {
-        chat_man.text ="MalChecker: checks for malware\n" +
+        chat_man.text ="MalChecker: Checks for malware.\n" +
         "--scan-all:\n" +
         "Selects everything for scanning.\n" +
         "\nrm:" +
-        "\nShort for remove" +
-        "\n'-r' when followed by a filename allows you to completely delete the folder.\n" +
-        "\nqoperation: This is a program that sets up the backup commands." +
-        "\ndrbackup: Short for disaster recovery" +
-        "\n'-t' is the type of backup you want." +
-        "\n'Q_FULL' will be a full backup.";
+        "\nShort for remove." +
+        "\n-r: Followed by a filename allows you to completely delete the folder.\n" +
+        "\nqoperation: Sets up the backup commands." +
+        "\ndrbackup: Short for disaster recovery." +
+        "\n-t Q_FULL: Restores entire filesystem.";
     }
 }
