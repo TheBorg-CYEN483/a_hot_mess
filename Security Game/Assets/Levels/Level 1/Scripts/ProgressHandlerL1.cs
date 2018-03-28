@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System.Collections;
 
 
 public class ProgressHandlerL1
@@ -17,6 +17,7 @@ public class ProgressHandlerL1
 	private List<string> chatPanes = new List<string> ();
 
 	// Interactable Scene Objects
+	private Scrollbar assist_scrollbar;
 	private Text player_assistance_text;
 	private Button advanceChat;
 	private Button retractChat;
@@ -33,6 +34,7 @@ public class ProgressHandlerL1
 								GameObject a_MACbox,
 								GameObject a_captureTank,
 								GameObject a_crackWindow,
+								Scrollbar a_assist_bar,
 								Text a_assistance_text,
 								Button a_advanceChat,
 								Button a_retractChat)
@@ -41,6 +43,7 @@ public class ProgressHandlerL1
 		MACbox = a_MACbox;
 		captureTank = a_captureTank;
 		crackWindow = a_crackWindow;
+		assist_scrollbar = a_assist_bar;
 		player_assistance_text = a_assistance_text;
 		advanceChat = a_advanceChat;
 		retractChat = a_retractChat;
@@ -50,8 +53,7 @@ public class ProgressHandlerL1
 		bcastHandler = new BroadcastHandler(nodes);
 	}
 
-	void Start(){}
-	void Update(){}
+
 
 	// Draw objects relevant to current task
 	public void incremenetScenePhase()
@@ -62,19 +64,24 @@ public class ProgressHandlerL1
 			//"Monitoring mode started. Showing broadcasts and AP MAC"
 			MACbox.SetActive (true);
 			bcastHandler.toggleBroadcastVis ();
+
+			currScenePhase++;
+			incrementChatPage ();
 			break;
 		case 1:
 			//"Handshake captured on wlan0. Data stored in captureFile.pak"
 			captureTank.SetActive (true);
 			// render captured broadcast(s) in tank
+
+			currScenePhase++;
+			incrementChatPage ();
 			break;
 		case 2:
 			//"Cracking WPA key from captureFile.pak, weakPasswordList"
 			// unrender nodes
 			// move tank
 			// render crackwindow
-			crackTimer();
-			SceneManager.LoadScene ("Level 1_Exit");
+			StaticCoroutine.StartCoroutine(crackTimer());
 			break;
 
 			// wait for completion
@@ -85,8 +92,6 @@ public class ProgressHandlerL1
 			//"Password Accepted; Level Solved"
 			break;
 		}
-		currScenePhase++;
-		incrementChatPage ();
 		//Debug.Log ("Scene phase incremented");
 	}
 
@@ -125,11 +130,13 @@ public class ProgressHandlerL1
 	public void switchToChat()
 	{
 		player_assistance_text.text = getChatPane (currAssistPane);
+		assist_scrollbar.value = 1.0f;
 	}
 
 	public void switchToManual()
 	{
 		player_assistance_text.text = getManualPane (currAssistPane);
+		//assist_scrollbar.value = 0;
 	}
 
 	private string getChatPane(int i)
@@ -193,9 +200,32 @@ public class ProgressHandlerL1
 		//"Keep going, and be careful! Who knows what they might do to you if they find out you hacked into their network.");
 	}
 
-	private IEnumerator crackTimer()
+	private static class StaticCoroutine {
+		private class CoroutineHolder : MonoBehaviour { }
+
+		//lazy singleton pattern. Note that I don't set it to dontdestroyonload - you usually want corotuines to stop when you load a new scene.
+		private static CoroutineHolder _runner;
+		private static CoroutineHolder runner {
+			get {
+				if (_runner == null) {
+					_runner = new GameObject("Static Corotuine Runner").AddComponent<CoroutineHolder>();
+				}
+				return _runner;
+			}
+		}
+
+		public static void StartCoroutine(IEnumerator corotuine) {
+			runner.StartCoroutine(corotuine);
+		}
+	}
+
+	IEnumerator crackTimer()
 	{
+		Debug.Log("starting crackTimer");
 		yield return new WaitForSeconds (3 + 3 * UnityEngine.Random.value);
+		Debug.Log ("crackTimer complete, advancing");
+		currScenePhase++;
+		incrementChatPage ();
 	}
 }
 

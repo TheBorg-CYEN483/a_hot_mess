@@ -9,10 +9,15 @@ public class Level1_Intro : MonoBehaviour
 {
 	public Button leftButton;
 	public Text dialogue;
+	public GameObject entryRoom;
 	public GameObject client;
 	public GameObject router;
-	public GameObject broadcast;
-	public GameObject connectionText;
+	public GameObject broadcast1;
+	public GameObject broadcast2;
+	public GameObject connectionTunnel;
+	public GameObject connectionText1;
+	public GameObject connectionText2;
+	public GameObject tunnelText;
 	private int page = 0;
 	private Dictionary<int, Action> pageMethods;
 	private List<string> openingDialogue = new List<string>() {
@@ -77,41 +82,87 @@ public class Level1_Intro : MonoBehaviour
 	private void ShowPage_9()
 	{
 		dialogue.text = openingDialogue[page];
+		// connection established frame
+		connectionTunnel.SetActive (true);
+		tunnelText.SetActive (true);
+		connectionText1.SetActive (false);
+		broadcast1.SetActive (false);
 	}
 
 	private void ShowPage_8()
 	{
 		dialogue.text = openingDialogue[page];
+		// handshake 6
+		connectionText1.GetComponent<Text> ().text = "Got it! Starting Connection";
+		connectionText1.SetActive (true);
+		connectionText2.SetActive (false);
+		broadcast1.SetActive (true);
+		broadcast2.SetActive (false);
+		connectionTunnel.SetActive (false);
+		tunnelText.SetActive (false);
 	}
 
 	private void ShowPage_7()
 	{
 		// dialogue.text = openingDialogue[page];
+		// handhskae 5
+		connectionText2.GetComponent<Text> ().text = "I recognise your proof! You are free to connect!";
+		connectionText1.SetActive (false);
+		connectionText2.SetActive (true);
+		broadcast1.SetActive (false);
+		broadcast2.SetActive (true);
 	}
 
 	private void ShowPage_6()
 	{
 		// dialogue.text = openingDialogue[page];
+		// handshake 4
+		connectionText1.GetComponent<Text> ().text = "I'm green computer! I can prove I know your password";
+		connectionText1.SetActive (true);
+		connectionText2.SetActive (false);
+		broadcast1.SetActive (true);
+		broadcast2.SetActive (false);
 	}
 
 	private void ShowPage_5()
 	{
 		// dialogue.text = openingDialogue[page];
+		//handshake 3
+		connectionText2.GetComponent<Text> ().text = "Who specifically is trying to connect?";
+		connectionText1.SetActive (false);
+		connectionText2.SetActive (true);
+		broadcast1.SetActive (false);
+		broadcast2.SetActive (true);
 	}
 
 	private void ShowPage_4()
 	{
 		dialogue.text = openingDialogue[page];
+		//handshake 2
+		connectionText2.GetComponent<Text> ().text = "I'm able to host a new conneciton!";
+		connectionText1.SetActive (false);
+		connectionText2.SetActive (true);
+		broadcast1.SetActive (false);
+		broadcast2.SetActive (true);
 	}
 
 	private void ShowPage_3()
 	{
 		dialogue.text = openingDialogue[page];
+		//handshake 1
+		connectionText1.GetComponent<Text> ().text = "Is there a router nearby I canconnect to?";
+		entryRoom.SetActive (false);
+		connectionText1.SetActive (true);
+		connectionText2.SetActive (false);
+		broadcast1.SetActive (true);
+		broadcast2.SetActive (false);
 	}
 
 	private void ShowPage_2()
 	{
 		dialogue.text = openingDialogue[page];
+
+		entryRoom.SetActive (true);
 	}
 
 	private void ShowPage_1()
@@ -124,6 +175,12 @@ public class Level1_Intro : MonoBehaviour
 	{
 		leftButton.interactable = false;
 		dialogue.text = openingDialogue[page];
+
+		entryRoom.SetActive (true);
+		connectionText1.SetActive (false);
+		connectionText2.SetActive (false);
+		broadcast1.SetActive (false);
+		broadcast2.SetActive (false);
 	}
 
 	public void ClickNext()

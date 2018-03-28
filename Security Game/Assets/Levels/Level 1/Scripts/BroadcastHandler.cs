@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BroadcastHandler
 {
-	private Broadcast braodcastPrefab;
+	private Broadcast broadcastPrefab;
 	private List<Broadcast> messages;
 	private List<GameObject> nodes;
 	private bool msgVisible;
@@ -31,13 +31,15 @@ public class BroadcastHandler
 
 	private void initBroadcasts()
 	{
-		// nodes[0] should be Level Router
-		// for each client in the level
-		for (int i = 1; i < nodes.Count - 1; i++)
-		{
-			messages.Add(Object.Instantiate (braodcastPrefab, nodes[i].transform));
-			messages [i].Initialise (nodes [i], nodes [0]);
-			messages [i].Hide ();
+		if (false) {
+		//if (nodes.Count != 0) {
+			// nodes[0] should be Level Router
+			// for each client in the level
+			for (int i = 1; i < nodes.Count - 1; i++) {
+				messages.Add (Object.Instantiate (broadcastPrefab, nodes [i].transform));
+				messages [i].Initialise (nodes [i], nodes [0]);
+				messages [i].Hide ();
+			}
 		}
 	}
 }

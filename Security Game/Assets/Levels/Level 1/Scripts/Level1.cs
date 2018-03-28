@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Level1 : MonoBehaviour
@@ -23,6 +24,7 @@ public class Level1 : MonoBehaviour
 
 	// Dynamic Objects in Scene
 	public List<GameObject> nodes;
+	public Scrollbar assist_scrollbar;
 	public Text player_assistance_text;
 	public GameObject MACbox;
 	public GameObject captureTank;
@@ -33,7 +35,7 @@ public class Level1 : MonoBehaviour
 	{
 		// Utility Reference
 		progressHandler = new ProgressHandlerL1 (	nodes, MACbox, captureTank, crackWindow,
-			player_assistance_text, advanceChat, retractChat);	
+			assist_scrollbar, player_assistance_text, advanceChat, retractChat);	
 
 		// UI Buttons
 		chatbutton.onClick.AddListener(() => progressHandler.switchToChat());
@@ -59,6 +61,12 @@ public class Level1 : MonoBehaviour
 			inputfield.text = "";
 			inputfield.ActivateInputField ();
 		}
+
+		if (progressHandler.getCurrentPhase () == 3 &&
+		    (Input.GetMouseButtonDown (0) ||
+		    Input.GetKeyDown (KeyCode.Return) ||
+		    Input.GetKeyDown (KeyCode.Space)))
+			SceneManager.LoadScene ("Level 1_Exit");
 	}
 
 
@@ -107,35 +115,16 @@ public class Level1 : MonoBehaviour
 			break;
 
 			// wait for completion
-			// switch scene to Level 1 Exit
+			// increment Scene Phase to 3
+			// switch scene to Level 1 Exit on player interaction
 
 			// todo, remove this last case for final implementation
-		case 3:
-			terminalLog ("Password Accepted; Level Solved");
-			break;
+//		case 3:
+//			terminalLog ("Password Accepted; Level Solved");
+//			break;
 		}
 		progressHandler.incremenetScenePhase ();
 	}
-
-	// Activate scene changes with progHandler and Change Button Accessibility
-//	void incrementChatPage()
-//	{
-//		progressHandler.incrementChatPage ();
-//
-//		retractChat.gameObject.SetActive (true);
-//		if (progressHandler.getCurrentPane() >= progressHandler.getCurrentPhase())
-//			advanceChat.gameObject.SetActive (false);
-//	}
-//
-//	// Activate scene changes with progHandler and Change Button Accessibility
-//	void decrementChatPage()
-//	{
-//		progressHandler.decrementChatPage ();
-//
-//		advanceChat.gameObject.SetActive (true);
-//		if (progressHandler.getCurrentPane() == 0)
-//			retractChat.gameObject.SetActive (false);
-//	}
 
 	// Output string to Terminal with autoscroll
 	void terminalLog(string str)
