@@ -11,9 +11,21 @@ public class SendAway : MonoBehaviour
 
     IEnumerator Process(Collider2D target)
     {
-        target.gameObject.SetActive(false);
+        Color packetColor = target.gameObject.GetComponent<SpriteRenderer>().color;
+        Color textColor = target.gameObject.GetComponentInChildren<TextMesh>().color;
+        target.gameObject.GetComponent<SpriteRenderer>().color = new Color(packetColor.r, packetColor.g, packetColor.b, 0);
+        target.gameObject.GetComponentInChildren<TextMesh>().color = new Color(textColor.r, textColor.g, textColor.b, 0);
         Vector3 euler = transform.eulerAngles;
         euler.z = Random.Range(30f, 195f);
+
+        if (euler.z > 90)
+        {
+            target.GetComponentInChildren<TextMesh>().transform.localRotation = Quaternion.Euler(0, 0, 180);
+        }
+        else
+        {
+            target.GetComponentInChildren<TextMesh>().transform.localRotation = Quaternion.Euler(0, 0, 0);
+        }
 
         yield return new WaitForSeconds(1.5f);
 
@@ -24,6 +36,7 @@ public class SendAway : MonoBehaviour
             new Vector3(500f * Mathf.Cos(euler.z * Mathf.Deg2Rad), 500f * Mathf.Sin(euler.z * Mathf.Deg2Rad), 0f),
             10f * Time.deltaTime
         );
-        target.gameObject.SetActive(true);
+        target.gameObject.GetComponent<SpriteRenderer>().color = new Color(packetColor.r, packetColor.g, packetColor.b, 255);
+        target.gameObject.GetComponentInChildren<TextMesh>().color = new Color(textColor.r, textColor.g, textColor.b, 255);
     }
 }

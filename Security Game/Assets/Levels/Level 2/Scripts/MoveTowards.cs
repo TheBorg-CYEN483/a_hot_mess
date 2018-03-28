@@ -18,6 +18,11 @@ public class MoveTowards : MonoBehaviour
         {
             if (!exiting)
             {
+                if (routerTransform.position.x < transform.position.x)
+                {
+                    GetComponentInChildren<TextMesh>().transform.localRotation = Quaternion.Euler(0, 0, 180);
+                }
+
                 transform.position = Vector3.MoveTowards(new Vector3(transform.position.x, transform.position.y, 0f), routerTransform.position, 10f * Time.deltaTime);
                 Vector3 vectorToTarget = routerTransform.position - transform.position;
                 float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
