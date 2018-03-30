@@ -11,8 +11,8 @@ public class End : MonoBehaviour
     private int page = 0;
     // private Dictionary<int, Action> pageMethods;
     private List<string> openingDialogue = new List<string>() {
-        "Charles: That was impressive. Remind me to stay on your good side, wouldn't want you near my access point.",
-        "Ada: Yes, Yes, good for you, don't do it again. Now go to the next floor.",
+        "Charles: That was impressive. Remind me to stay on your good side, wouldn't want you near my router.",
+        "Ada: Yes, yes, good for you, don't do it again. Now go to the next floor.",
         };
 
     public void ClickNext()

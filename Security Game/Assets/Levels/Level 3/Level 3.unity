@@ -4036,7 +4036,7 @@ GameObject:
   - component: {fileID: 991304198}
   - component: {fileID: 991304197}
   m_Layer: 5
-  m_Name: Folder (1)
+  m_Name: FolderToDelete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7213,7 +7213,6 @@ MonoBehaviour:
     scan with MalChecker you would type\n  Malchecker --scan\n  all:\n- This will
     select everything in the\n  space that you specify.\n- For instance, scan-all
     will select\n  everything"
-  target: {fileID: 0}
   smoothTime: 0.3
   velocity: 0
   limit: 0
@@ -7457,7 +7456,7 @@ GameObject:
   - component: {fileID: 1661093195}
   - component: {fileID: 1661093194}
   m_Layer: 5
-  m_Name: Foldertab (1)
+  m_Name: FolderTabToDelete
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

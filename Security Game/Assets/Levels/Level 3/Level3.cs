@@ -22,17 +22,8 @@ public class Level3  : MonoBehaviour
     public Button chatbutton;
     public Button manualbutton;
     public string dialog_text = "";//Used for placing text within the chat
-    public string manual_text = 
-    "scan" +
-    "\n- This will begin looking through the" +
-    "\n  folders. To setup the scan with MalChecker you would type" +
-    "\n  Malchecker --scan" +
-    "\n  all:" +
-    "\n- This will select everything in the" +
-    "\n  space that you specify." +
-    "\n- For instance, scan-all will select" +
-    "\n  everything";
-    public Transform target;
+    public string manual_text;
+    
     public float smoothTime = 0.3F;
     public float velocity = 0.0F;
     Vector3 targetPosition = Vector3.zero;
@@ -44,12 +35,13 @@ public class Level3  : MonoBehaviour
     {
         chatbutton.onClick.AddListener(() => chat());
         manualbutton.onClick.AddListener(() => manual());
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        inputfield.ActivateInputField();  
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
        
         if (limit == 0)
@@ -57,8 +49,8 @@ public class Level3  : MonoBehaviour
             Gabriel = gameObject.transform.Find("Malware_Gabriel").gameObject;//gameObject refers to the object running the script
             Morgan = gameObject.transform.Find("Malware_Morgan").gameObject;
             Pat = gameObject.transform.Find("Malware_Pat").gameObject;
-            Folder_to_delete = gameObject.transform.Find("FileSystem").Find("Folder (1)").gameObject;
-            FolderTab_to_delete = gameObject.transform.Find("FileSystem").Find("Foldertab (1)").gameObject;
+            Folder_to_delete = gameObject.transform.Find("FileSystem").Find("FolderToDelete").gameObject;
+            FolderTab_to_delete = gameObject.transform.Find("FileSystem").Find("FolderTabToDelete").gameObject;
             Damaged_Filesystem = gameObject.transform.Find("Damages").gameObject;
             Gabriel.SetActive(false);
             Morgan.SetActive(false);
@@ -89,7 +81,7 @@ public class Level3  : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Return))
         {
             output_text.text += ">>  " + input + "\n";
-        
+            inputfield.text = "";
         if (limit == 0)
         {           
           if (split[0] == "MalChecker")
@@ -101,17 +93,10 @@ public class Level3  : MonoBehaviour
                     {                   
                         dialog_text = 
                         "Ada: Good, now you can see the malware \n" + "\n" +
-                        "Charles: Luckily, MalChecker trapped them in the failure folder.\n" + 
+                        "Charles: Luckily, MalChecker trapped them in the 'failure' folder.\n" + 
                         "They can’t move anymore." + 
                         "\nNow you just need to remove the folder.\n";
-                        manual_text += 
-                        "\nrm:" +
-                        "\n- This is short for remove" +
-                        "\n- Using '-r' means it will delete" +
-                        "\n everything in the folder as well." +
-                        "\n- Next, type the name of the folder you" +
-                        "\n want to remove";
-
+                
                     Gabriel.SetActive(true);
                     Morgan.SetActive(true);
                     Pat.SetActive(true);
@@ -123,6 +108,8 @@ public class Level3  : MonoBehaviour
                     Morgan.transform.localScale -= new Vector3(0.7F, 0.7F, 0);
                     limit += 1;                
                     }
+                    chat();
+                    inputfield.ActivateInputField();
                 }
 
                     else if (split.Length == 1)
@@ -148,6 +135,7 @@ if (limit == 1)
    
     if(Input.GetKeyDown(KeyCode.Return))
     {
+        inputfield.text = "";
         if (split[0] == "rm")
         {
             if(split.Length == 3)
@@ -160,17 +148,7 @@ if (limit == 1)
                 "\nGood thing we made a backup!" +
                 "\nI knew copying all of your files without your permission would come in handy! I’ll send it to you now.\n" + "\n" +
                 "\nReceived: backup.xml\n";
-                manual_text += "\nqoperation: This is a program" +
-                "\nthat sets up the" +
-                "\nbackup commands." +
-                "\ndrbackup: This is short for" +
-                "\ndisaster recovery backup and" +
-                "\nspecifies what qoperation" +
-                "\nshould do." +
-                "\n- Using '-t' will be the type of" +
-                "\n backup you want." +
-                "\n- For instance -t Q_FULL" +
-                "\n will be a full backup.";
+                
                 limit += 1;
                 DestroyImmediate(Gabriel);
                 DestroyImmediate(Pat);
@@ -190,11 +168,14 @@ if (limit == 1)
                 }           
          
         }   
+        manual();
+        chat();
        
 }
 }
 if (Input.GetKeyDown(KeyCode.Return))
 {
+    inputfield.text = "";
 if (limit == 2 )
 {
     if(split.Length == 4)
@@ -246,13 +227,19 @@ if (limit == 2 )
 
     void chickendinner()
     { 
-    //System.Threading.Thread.Sleep(5000);
-    SceneManager.LoadScene(("Ending Badge"));
-   
+    SceneManager.LoadScene(("Ending Badge"));   
     }
 
     void manual()
     {
-        chat_man.text = manual_text;
+        chat_man.text ="MalChecker: Checks for malware.\n" +
+        "--scan-all:\n" +
+        "Selects everything for scanning.\n" +
+        "\nrm:" +
+        "\nShort for remove." +
+        "\n-r: Followed by a filename allows you to completely delete the folder.\n" +
+        "\nqoperation: Sets up the backup commands." +
+        "\ndrbackup: Short for disaster recovery." +
+        "\n-t Q_FULL: Restores entire filesystem.";
     }
 }

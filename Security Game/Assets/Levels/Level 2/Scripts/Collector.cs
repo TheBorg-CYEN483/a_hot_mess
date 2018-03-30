@@ -19,6 +19,7 @@ public class Collector : MonoBehaviour
     IEnumerator Respawn(Collider2D target)
     {
         target.transform.position = new Vector3(target.transform.position.x, target.transform.position.y, 5f);
+        target.GetComponentInChildren<TextMesh>().transform.localRotation = Quaternion.Euler(0, 0, 0);
         Vector3 temp = target.transform.position;
 
         if (control)
