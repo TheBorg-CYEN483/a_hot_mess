@@ -24,17 +24,22 @@ public class Level1 : MonoBehaviour
 
 	// Dynamic Objects in Scene
 	public List<GameObject> nodes;
+	public List<GameObject> broadcasts;
 	public Scrollbar assist_scrollbar;
 	public Text player_assistance_text;
 	public GameObject MACbox;
-	public GameObject captureTank;
+	public GameObject captureTank_init;
+	public GameObject captureTank_post;
 	public GameObject crackWindow;
+	public GameObject crackArrow;
 
 	// Use this for initialization
 	void Start()
 	{
 		// Utility Reference
-		progressHandler = new ProgressHandlerL1 (	nodes, MACbox, captureTank, crackWindow,
+		//   (read: horribly coupled spaghetti)
+		progressHandler = new ProgressHandlerL1 (	nodes, broadcasts, MACbox, captureTank_init, 
+			captureTank_post, crackWindow, crackArrow, 
 			assist_scrollbar, player_assistance_text, advanceChat, retractChat);	
 
 		// UI Buttons
@@ -52,9 +57,9 @@ public class Level1 : MonoBehaviour
 		// level splash screen, active removal
 		if (levelScreen.activeSelf && Input.GetMouseButtonDown (0))
 			levelScreen.SetActive (false);
-		
-		string input = inputfield.text;
 
+		// user input trigger
+		string input = inputfield.text;
 		if (Input.GetKeyDown(KeyCode.Return))
 		{
 			parseInput (input);
@@ -62,6 +67,7 @@ public class Level1 : MonoBehaviour
 			inputfield.ActivateInputField ();
 		}
 
+		// transition to Level Exit after successful cracking
 		if (progressHandler.getCurrentPhase () == 3 &&
 		    (Input.GetMouseButtonDown (0) ||
 		    Input.GetKeyDown (KeyCode.Return) ||
@@ -80,7 +86,7 @@ public class Level1 : MonoBehaviour
 			"aircrack-ng -w weakPasswordList -b 80:2a:a8:17:74:b5 captureFile"
 		};
 
-
+		// echo and tokenise input
 		terminalLog(">>  " + input);
 		List<string> inputTokens = input.Split(' ').ToList();
 
@@ -99,7 +105,7 @@ public class Level1 : MonoBehaviour
 	}
 
 	// Output description in the terminal output
-	// Use progressHandler to track progress and updaste objects
+	// Use progressHandler to track progress and update objects in scene
 	void incremenetScenePhase()
 	{
 		switch(progressHandler.getCurrentPhase())
@@ -114,19 +120,13 @@ public class Level1 : MonoBehaviour
 			terminalLog ("Cracking WPA key from captureFile.pak, weakPasswordList");
 			break;
 
-			// wait for completion
-			// increment Scene Phase to 3
-			// switch scene to Level 1 Exit on player interaction
-
-			// todo, remove this last case for final implementation
-//		case 3:
-//			terminalLog ("Password Accepted; Level Solved");
-//			break;
+			// "case 3" requires no terminal input, just transitions to Exit Scene
 		}
 		progressHandler.incremenetScenePhase ();
 	}
 
 	// Output string to Terminal with autoscroll
+	// note: long output lines cause issue with autoscroll
 	void terminalLog(string str)
 	{
 		output_text.text += str + "\n";

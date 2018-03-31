@@ -25,32 +25,42 @@ public class ProgressHandlerL1
 
 	// Dynamic Objects in Scene
 	private List<GameObject> nodes;
+	private List<GameObject> broadcasts;
 	private GameObject MACbox;
 	private BroadcastHandler bcastHandler;
-	private GameObject captureTank;
+	private GameObject captureTank0;
+	private GameObject captureTank1;
 	private GameObject crackWindow;
+	private GameObject crackArrow;
 
 	public ProgressHandlerL1 (	List<GameObject> a_nodes,
+								List<GameObject> a_broadcasts,
 								GameObject a_MACbox,
-								GameObject a_captureTank,
+								GameObject a_captureTank_init,
+								GameObject a_captureTank_post,
 								GameObject a_crackWindow,
+								GameObject a_crackArrow,
 								Scrollbar a_assist_bar,
 								Text a_assistance_text,
 								Button a_advanceChat,
 								Button a_retractChat)
 	{
 		nodes = a_nodes;
+		broadcasts = a_broadcasts;
 		MACbox = a_MACbox;
-		captureTank = a_captureTank;
+		captureTank0 = a_captureTank_init;
+		captureTank1 = a_captureTank_post;
 		crackWindow = a_crackWindow;
+		crackArrow = a_crackArrow;
 		assist_scrollbar = a_assist_bar;
 		player_assistance_text = a_assistance_text;
 		advanceChat = a_advanceChat;
 		retractChat = a_retractChat;
 
+		InitObjects ();
 		InitChatData ();
 		InitManualData ();
-		bcastHandler = new BroadcastHandler(nodes);
+		bcastHandler = new BroadcastHandler(nodes, broadcasts);
 	}
 
 
@@ -62,38 +72,51 @@ public class ProgressHandlerL1
 		{
 		case 0:
 			//"Monitoring mode started. Showing broadcasts and AP MAC"
+
+			// show router MAC addr 
 			MACbox.SetActive (true);
+			// show messages in transit
 			bcastHandler.toggleBroadcastVis ();
 
+			// progress to next phase
 			currScenePhase++;
 			incrementChatPage ();
 			break;
 		case 1:
 			//"Handshake captured on wlan0. Data stored in captureFile.pak"
-			captureTank.SetActive (true);
-			// render captured broadcast(s) in tank
 
+			// render captured broadcast(s) in tank
+			captureTank0.SetActive (true);
+
+			// progress to next phase
 			currScenePhase++;
 			incrementChatPage ();
 			break;
 		case 2:
 			//"Cracking WPA key from captureFile.pak, weakPasswordList"
-			// unrender nodes
-			// move tank
+
+			//unrender nodes & broadcasts
+			foreach (GameObject node in nodes)
+				node.SetActive (false);
+			bcastHandler.toggleBroadcastVis ();
+			MACbox.SetActive (false);
+
+			// move/rerender tank
+			captureTank0.SetActive (false);
+			captureTank1.SetActive (true);
+
 			// render crackwindow
+			crackWindow.SetActive (true);
+			crackArrow.SetActive (true);
+
+			// start timer to update Chat & scene phase after password is found
 			StaticCoroutine.StartCoroutine(crackTimer());
 			break;
 
-			// wait for completion
-			// switch scene to Level 1 Exit
-
-			// todo, remove this last case for final implementation
-		case 3:
-			//"Password Accepted; Level Solved"
-			break;
+			// transition to Exit scene (where pasword is entered) handled in Level1.cs
 		}
-		//Debug.Log ("Scene phase incremented");
 	}
+
 
 	public int getPaneCount()
 	{
@@ -139,6 +162,7 @@ public class ProgressHandlerL1
 		//assist_scrollbar.value = 0;
 	}
 
+
 	private string getChatPane(int i)
 	{
 		return chatPanes [i];
@@ -152,6 +176,19 @@ public class ProgressHandlerL1
 	private int getCurrentPane()
 	{
 		return currAssistPane;
+	}
+
+	private void InitObjects()
+	{
+		foreach (GameObject node in nodes)
+			node.SetActive (true);
+		foreach (GameObject bcast in broadcasts)
+			bcast.SetActive (false);
+		MACbox.SetActive (false);
+		captureTank0.SetActive (false);
+		captureTank1.SetActive (false);
+		crackWindow.SetActive (false);
+		crackArrow.SetActive (false);
 	}
 
 	private void InitManualData()
@@ -200,32 +237,12 @@ public class ProgressHandlerL1
 		//"Keep going, and be careful! Who knows what they might do to you if they find out you hacked into their network.");
 	}
 
-	private static class StaticCoroutine {
-		private class CoroutineHolder : MonoBehaviour { }
-
-		//lazy singleton pattern. Note that I don't set it to dontdestroyonload - you usually want corotuines to stop when you load a new scene.
-		private static CoroutineHolder _runner;
-		private static CoroutineHolder runner {
-			get {
-				if (_runner == null) {
-					_runner = new GameObject("Static Corotuine Runner").AddComponent<CoroutineHolder>();
-				}
-				return _runner;
-			}
-		}
-
-		public static void StartCoroutine(IEnumerator corotuine) {
-			runner.StartCoroutine(corotuine);
-		}
-	}
-
 	IEnumerator crackTimer()
 	{
-		Debug.Log("starting crackTimer");
-		yield return new WaitForSeconds (3 + 3 * UnityEngine.Random.value);
-		Debug.Log ("crackTimer complete, advancing");
+//		Debug.Log("starting crackTimer");
+		yield return new WaitForSeconds (5);
+//		Debug.Log ("crackTimer complete, advancing");
 		currScenePhase++;
 		incrementChatPage ();
 	}
 }
-
