@@ -10,6 +10,7 @@ public class Level1 : MonoBehaviour
 {
 	// Teaching Elements, Progression Data, Dynamic Elements
 	private ProgressHandlerL1 progressHandler;
+	private string prevCmd;
 
 	// Terminal, Buttons, etc. Interactable UI elements
 	public GameObject levelScreen;
@@ -58,21 +59,32 @@ public class Level1 : MonoBehaviour
 		if (levelScreen.activeSelf && Input.GetMouseButtonDown (0))
 			levelScreen.SetActive (false);
 
-		// user input trigger
-		string input = inputfield.text;
-		if (Input.GetKeyDown(KeyCode.Return))
-		{
-			parseInput (input);
-			inputfield.text = "";
-			inputfield.ActivateInputField ();
-		}
-
 		// transition to Level Exit after successful cracking
 		if (progressHandler.getCurrentPhase () == 3 &&
 		    (Input.GetMouseButtonDown (0) ||
 		    Input.GetKeyDown (KeyCode.Return) ||
-		    Input.GetKeyDown (KeyCode.Space)))
+		    Input.GetKeyDown (KeyCode.Space))) 
+		{
 			SceneManager.LoadScene ("Level 1_Exit");
+			return;
+		}
+		
+		// user input trigger
+		string input = inputfield.text;
+		if (Input.GetKeyDown(KeyCode.Return))
+		{
+			prevCmd = input;
+			parseInput (input);
+			inputfield.text = "";
+		}
+		inputfield.ActivateInputField ();
+		if (Input.GetKeyDown (KeyCode.DownArrow))
+			inputfield.text = "";
+		if (Input.GetKeyDown (KeyCode.UpArrow)) 
+		{
+			inputfield.text = prevCmd;
+			inputfield.caretPosition = inputfield.text.Length;
+		}
 	}
 
 
@@ -90,19 +102,89 @@ public class Level1 : MonoBehaviour
 		terminalLog(">>  " + input);
 		List<string> inputTokens = input.Split(' ').ToList();
 
-		// crude ordered solution check; bad for detailed feedback
-		for (var j = 0; j < inputTokens.Count; j++) 
+		// ordered solution check with basic feedback
+		int i = progressHandler.getCurrentPhase();
+		List<string> solutionTokens = solutions [i].Split ().ToList();
+		int j = 0;
+
+		if (inputTokens.Count > solutionTokens.Count)
 		{
-			if (solutions [progressHandler.getCurrentPhase()].Split () [j] != inputTokens [j]) 
-			{
-				terminalLog ("Input Error");
-				return;
-			}
+			terminalLog ("Command not recognised.");
+			return;
+		}
+		// fix this for flexibile output file in final version
+		while (j < inputTokens.Count && solutionTokens[j] == inputTokens[j])
+			j++;
+		if (j == solutionTokens.Count())
+		{
+			incremenetScenePhase ();
+			return;
 		}
 
-		// correct command entered, so:
-		incremenetScenePhase ();
+		switch (i) {
+		case 0:
+			switch (j) {
+			case 0:
+				terminalLog ("Command not recognised. Check the manual for more information.");
+				return;
+			case 1:
+				terminalLog ("Command incomplete; airmon-ng needs directions");
+				return;
+			case 2:
+				terminalLog ("Malformed command. Please specify a hardware interface.");
+				return;
+			}
+			break;
+		case 1:
+			switch (j) {
+			case 0:
+				terminalLog ("Command not recognised. Check the manual for info about capturing data.");
+				return;
+			case 1:
+				terminalLog ("Command incomplete; please specify options.");
+				return;
+			case 2:
+				terminalLog ("Command incomplete; --bssid requires a MAC address.");
+				return;
+			case 3:
+				terminalLog ("Command incomplete; airodump-ng needs an output destination.");
+				return;
+			case 4:
+				if (inputTokens.Count >= 5 && inputTokens[4] != "")
+					terminalLog ("Sorry, development version; rename file to 'captureFile'");
+				else
+					terminalLog ("Command incomplete; -w requires destination 'captureFile'");
+				return;
+			case 5:
+				terminalLog ("Command incomplete; airodump requires network hardware to be specified.");
+				return;
+			}
+			break;
+		case 2:
+			switch (j) {
+			case 0:
+				terminalLog ("Command not recognised. Check the manual for info about cracking keys.");
+				return;
+			case 1:
+				terminalLog ("Command incomplete; please specify options.");
+				return;
+			case 2:
+				terminalLog ("Command not recognised. -w needs a valid file.");
+				return;
+			case 3:
+				terminalLog ("Command not incomplete; please specify a target.");
+				return;
+			case 4:
+				terminalLog ("Command not recognised. -b needs a valid target.");
+				return;
+			case 5:
+				terminalLog ("Command malformed; aircrack-ng needs a capture file specified.");
+				return;
+			}
+			break;
+		}
 	}
+
 
 	// Output description in the terminal output
 	// Use progressHandler to track progress and update objects in scene
@@ -131,10 +213,13 @@ public class Level1 : MonoBehaviour
 	{
 		output_text.text += str + "\n";
 
-		linecounter += 1;
-		if (linecounter > 4)
+		Debug.Log (str.Length);
+		int apprxLines = (int) Mathf.Ceil((str.Length + 1)/75f);
+		linecounter += apprxLines;
+		if (linecounter > 6)
 		{
-			scroller.value -= (float).065;
+			scroller.value = 1f - (0.07f * (float) (linecounter-5));
 		}
+		Debug.Log (apprxLines + ", " + linecounter + " -> " + scroller.value);
 	}
 }

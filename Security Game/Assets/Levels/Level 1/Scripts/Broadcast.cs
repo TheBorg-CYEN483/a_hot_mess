@@ -8,6 +8,7 @@ public class Broadcast : MonoBehaviour
 	private GameObject node1, node2;
 	private Vector2 source, target, velocity;
 	private int sequence;
+	private bool usable;
 
 	public void Initialise (GameObject a_node1, GameObject a_node2)
 	{
@@ -23,7 +24,7 @@ public class Broadcast : MonoBehaviour
 	}
 
 	// Use this for initialization
-	void Start () {	}
+	void Start () {	usable = true; }
 	
 	// Update is called once per frame
 	void Update () 
@@ -61,7 +62,18 @@ public class Broadcast : MonoBehaviour
 	{
 		this.gameObject.GetComponent<SpriteRenderer> ().color = c;
 	}
+//
+//	private void setUsable(bool s)
+//	{
+//		usable = s;
+//	}
 
+	public bool Usable {
+		get { return usable; }
+		set { usable = value; }
+	}
+
+		
 	private void setTarget(Vector2 a_target, Vector2 a_src)
 	{
 		target = a_target;
@@ -73,7 +85,9 @@ public class Broadcast : MonoBehaviour
 	IEnumerator restartBroadcast()
 	{
 		yield return new WaitForSeconds (2 + 3 * Random.value);
-		this.gameObject.SetActive (true);
-		sequence = 0;
+		if (usable) {
+			this.gameObject.SetActive (true);
+			sequence = 0;
+		}
 	}
 }

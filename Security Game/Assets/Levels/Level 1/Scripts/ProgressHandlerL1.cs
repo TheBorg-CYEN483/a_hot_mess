@@ -98,7 +98,7 @@ public class ProgressHandlerL1
 			//unrender nodes & broadcasts
 			foreach (GameObject node in nodes)
 				node.SetActive (false);
-			bcastHandler.toggleBroadcastVis ();
+			bcastHandler.destroyBroadcasts ();
 			MACbox.SetActive (false);
 
 			// move/rerender tank

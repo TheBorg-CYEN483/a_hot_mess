@@ -33,10 +33,10 @@ public class Level1_Intro : MonoBehaviour
 		// Last frame of Description
 		"Ada: To start the attack, you're going to have to capture the first couple of messages at the start of a new connection.",
 		"Charles: The router and computer will keep connecting even after we capture the messages. That's fine. We just need to get the information before they connect! " +
-		    "After the router and computer establish their conection, it's like theiy're talking through a phone line. We can't catch the information they're sharing anymore.",
-		"Ada: We also have a giant list of weak passwords. It's passwords that you would be able to find in the dictionary, like \"waffle\" or \"barnacle\"." +
+		    "After the router and computer establish their connection, it's like they're talking through a phone line. We can't catch the information they're sharing anymore.",
+		"Ada: We also have a giant list of weak passwords. It has passwords that you would be able to find in the dictionary, like \"waffle\" or \"barnacle\"." +
 		    "You're going to take the list and the messages we captured and compare them.",
-		"Charles: We have a script to do that comparison for you! If the script finds a match , you'll know the password and be able to connect to his network!",
+		"Charles: We have a script to do that comparison for you! If the script finds a match, you'll know the password and be able to connect to his network!",
 		// Scene change to Level
 	};
 
@@ -117,7 +117,7 @@ public class Level1_Intro : MonoBehaviour
 	{
 		// dialogue.text = openingDialogue[page];
 		// handshake 4
-		connectionText1.GetComponent<Text> ().text = "I'm green computer! I can prove I know your password";
+		connectionText1.GetComponent<Text> ().text = "I'm green computer! I can prove I know your password!";
 		connectionText1.SetActive (true);
 		connectionText2.SetActive (false);
 		broadcast1.SetActive (true);
@@ -139,7 +139,7 @@ public class Level1_Intro : MonoBehaviour
 	{
 		dialogue.text = openingDialogue[page];
 		//handshake 2
-		connectionText2.GetComponent<Text> ().text = "I'm able to host a new conneciton!";
+		connectionText2.GetComponent<Text> ().text = "I'm able to host a new connection!";
 		connectionText1.SetActive (false);
 		connectionText2.SetActive (true);
 		broadcast1.SetActive (false);
@@ -150,7 +150,7 @@ public class Level1_Intro : MonoBehaviour
 	{
 		dialogue.text = openingDialogue[page];
 		//handshake 1
-		connectionText1.GetComponent<Text> ().text = "Is there a router nearby I canconnect to?";
+		connectionText1.GetComponent<Text> ().text = "Is there a router nearby I can connect to?";
 		entryRoom.SetActive (false);
 		connectionText1.SetActive (true);
 		connectionText2.SetActive (false);

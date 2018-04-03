@@ -28,6 +28,15 @@ public class BroadcastHandler
 		}
 	}
 
+	public void destroyBroadcasts()
+	{
+		foreach (GameObject bcast in broadcasts) 
+		{
+			bcast.GetComponent<Broadcast> ().Usable = false;
+			bcast.SetActive (false);
+		}
+	}
+
 	private void initBroadcasts()
 	{
 		if (nodes.Count != 0) 
