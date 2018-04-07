@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class Level3  : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class Level3  : MonoBehaviour
     public GameObject Gabriel;
     public GameObject Morgan;
     public GameObject Pat;
+    public Scrollbar scroller;
 
     public GameObject Folder_to_delete;
 
@@ -29,21 +31,23 @@ public class Level3  : MonoBehaviour
     Vector3 targetPosition = Vector3.zero;
 
     public int limit = 0;
+    public int linecounter = 0;
 
     // Use this for initialization
     void Start()
     {
         chatbutton.onClick.AddListener(() => chat());
         manualbutton.onClick.AddListener(() => manual());
-       
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(linecounter);
         inputfield.ActivateInputField();  
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-       
+
         if (limit == 0)
         {
             Gabriel = gameObject.transform.Find("Malware_Gabriel").gameObject;//gameObject refers to the object running the script
@@ -82,7 +86,12 @@ public class Level3  : MonoBehaviour
         {
             output_text.text += ">>  " + input + "\n";
             inputfield.text = "";
-        if (limit == 0)
+            linecounter += 1;
+            if (linecounter > 4)
+            {
+                scroller.value = 1 - (float).0135*(linecounter-3);
+            }
+            if (limit == 0)
         {           
           if (split[0] == "MalChecker")
             {
@@ -92,7 +101,7 @@ public class Level3  : MonoBehaviour
                     if (split[1] == "--scan-all")
                     {                   
                         dialog_text = 
-                        "Ada: Good, now you can see the malware \n" + "\n" +
+                        "Ada: Good, now you can see the malware. \n" + "\n" +
                         "Charles: Luckily, MalChecker trapped them in the 'failure' folder.\n" + 
                         "They can’t move anymore." + 
                         "\nNow you just need to remove the folder.\n";
@@ -112,10 +121,11 @@ public class Level3  : MonoBehaviour
                     inputfield.ActivateInputField();
                 }
 
-                    else if (split.Length == 1)
-                    {
+                else if (split.Length == 1)
+                {
+                        linecounter += 1;
                         output_text.text += "Check the manual for options!" +"\n";
-                    }
+                }
             }
 }
         }  
@@ -136,6 +146,7 @@ if (limit == 1)
     if(Input.GetKeyDown(KeyCode.Return))
     {
         inputfield.text = "";
+        
         if (split[0] == "rm")
         {
             if(split.Length == 3)
@@ -146,7 +157,8 @@ if (limit == 1)
                 dialog_text += 
                 "\nCharles: Well done! Looks like you lost your files, though." +
                 "\nGood thing we made a backup!" +
-                "\nI knew copying all of your files without your permission would come in handy! I’ll send it to you now.\n" + "\n" +
+                "\nI knew copying all of your files without your permission would come in handy! I’ll send it to you now.\n" +
+                "Ada: Charles! You know you're not supposed to do that!" +
                 "\nReceived: backup.xml\n";
                 
                 limit += 1;
@@ -156,15 +168,17 @@ if (limit == 1)
                 Folder_to_delete.SetActive(false);//Set the deleted folder and tab be invisible 
                 FolderTab_to_delete.SetActive(false);
                 Damaged_Filesystem.SetActive(true);
-                }   
+            }   
             }
                 else if(split.Length == 1)
                 {
-                    output_text.text += "Try using an option!"+ "\n";
+                        linecounter += 1;
+                        output_text.text += "Try using an option!"+ "\n";
                 }
                 else if(split[1] == "-r" && split.Length == 2)  
                 {
-                    output_text.text += "Type what you want to remove!" + "\n";
+                        linecounter += 1;
+                        output_text.text += "Type what you want to remove!" + "\n";
                 }           
          
         }   
@@ -175,15 +189,15 @@ if (limit == 1)
 }
 if (Input.GetKeyDown(KeyCode.Return))
 {
-    inputfield.text = "";
-if (limit == 2 )
+    
+    if (limit == 2 )
 {
-    if(split.Length == 4)
+    if(split.Length == 5)
     {
     if (split[0] == "qoperation")
     {
         shortened = input.Replace("qoperation ", "");
-        if (split[1] == "drbackup" && split[2] == "-t" && split[3] == "Q_FULL")
+        if (split[1] == "drbackup" && split[2] == "-t" && split[3] == "Q_FULL" && split[4] == "backup.xml")
         {
 
             Damaged_Filesystem.SetActive(false);
@@ -202,17 +216,25 @@ if (limit == 2 )
 
         else if(split.Length == 1)
         {
-            output_text.text += "Try specifying what you want to do!" + "\n";
+                    linecounter += 1;
+                    output_text.text += "Try specifying what you want to do!" + "\n";
         }
 
         else if(split[1] == "drbackup" && split.Length == 2)
         {
-            output_text.text += "Try using an option!" + "\n";
+                    linecounter += 1;
+                    output_text.text += "Try using an option!" + "\n";
         }
 
         else if(split[1] == "drbackup" && split[2] == "-t" && split.Length == 3)
         {
-            output_text.text += " Select the type of restore you want to use!" + "\n";
+                    linecounter += 1;
+                    output_text.text += "Select the type of restore you want to use!" + "\n";
+        }
+        else if(split[1] == "drbackup" && split[2] == "-t" && split[3] == "Q_FULL" && split.Length == 4)
+        {
+                    linecounter += 1;
+                    output_text.text += "Select the backup file" + "\n";         
         }
     
     
@@ -240,6 +262,6 @@ if (limit == 2 )
         "\n-r: Followed by a filename allows you to completely delete the folder.\n" +
         "\nqoperation: Sets up the backup commands." +
         "\ndrbackup: Short for disaster recovery." +
-        "\n-t Q_FULL: Restores entire filesystem.";
+        "\n-t Q_FULL: Restores entire filesystem from a chosen backup file.";
     }
 }

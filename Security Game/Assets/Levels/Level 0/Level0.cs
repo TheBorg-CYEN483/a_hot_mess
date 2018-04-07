@@ -87,6 +87,14 @@ public class Level0 : MonoBehaviour
                     scroller.value -= (float) .06;
                 }
             }
+            if (split.Length > 7 && split[0] == "iptables")
+            {
+                output_text.text += ">>  Looks like you have some extra words or spaces in there!\n";
+            }
+            if (split[0] != "iptables")
+            {
+                output_text.text += ">>  Command not recognized.\n";
+            }
 
             inputfield.text = "";
         }
@@ -110,10 +118,11 @@ public class Level0 : MonoBehaviour
     void manual()
     {
         chat_man.text = "iptables: This command lets you edit the blacklist." +
+            "\n\nHere are a few options, also known as \"arguments\", that you can try!" +
             "\n\nTry using '-A INPUT' to add something new to the blacklist." +
             "\n\nTyping '-s' and then an IP address tells the computer what source you are talking about." +
             "\n\nUsing '-j DROP' tells the computer to drop anything that comes from a certain source." +
-            "\n\nPut all of the commands on one line to add IP address to the blacklist!\n";
+            "\n\nPut the command and the options all on one line to add an IP address to the blacklist!\n";
         inputfield.ActivateInputField();
     }
 }

@@ -12,6 +12,9 @@ public class Level4Intro : MonoBehaviour {
     public Text cipheralpha;
     public Text plainalpha;
     public Text dialogue;
+    public GameObject firsthooded;
+    public GameObject secondhooded;
+    public GameObject Linus;
     public Button leftButton;
     public Button rightButton;
     public Image wall, floor, legr, legl, keyboard, monitor, computer, disk, power,table, panel;
@@ -43,8 +46,8 @@ public class Level4Intro : MonoBehaviour {
         + " the letters of the plain message and the blue letters are the letters of the coded text.", "Ada: We have shifted the "
         + "alphabet 7 letters. If the coded message is made by shifting 7 letters, the only way to make the message readable" 
         +" again is to shift it back 7 letters.", "Charles: After shifting the alphabet 7 places, the letter ‘A’ becomes" +
-        " ‘T’, ‘B’ becomes ‘U’, and so on. Now the encrypting begins. Just match the original message PIZZA to the blue letters" +
-        ". ‘P’ becomes ‘I’, ‘I’ becomes ‘B’, ‘Z’ becomes ‘S’, and ‘A’ becomes ‘T’. Oh, man, all this talk" +
+        " ‘H’, ‘B’ becomes ‘I’, and so on. Now the encrypting begins. Just match the original message PIZZA to the blue letters" +
+        ". ‘P’ becomes ‘W’, ‘I’ becomes ‘P’, ‘Z’ becomes ‘G’, and ‘A’ becomes ‘H’. Oh, man, all this talk" +
         " of pizza is making me hungry.", "Ada: It looks like Charles found a coded message that we need to decrypt using a Caesar Cipher. A good" +
         " place to start with ciphers like these (when you don’t know how many places to shift the alphabet) is to remember" +
         " common words in the English language as well as common letters. Remember: Every word must have a vowel in it and only" +
@@ -59,7 +62,13 @@ public class Level4Intro : MonoBehaviour {
 
         if (scene == 0)
         {
+            Linus.SetActive(true);
             leftButton.interactable = false;
+        }
+        else if(scene == 5)
+        {
+            firsthooded.SetActive(false);
+            secondhooded.SetActive(true);
         }
         else if(scene < 6)
         {
@@ -68,6 +77,7 @@ public class Level4Intro : MonoBehaviour {
 
         if (scene == 6)
         {
+            Linus.SetActive(false);
             leftButton.interactable = false;
             rightButton.interactable = true;
             panel.color = new Color(255, 255, 255, 255);
@@ -94,19 +104,19 @@ public class Level4Intro : MonoBehaviour {
             leftButton.interactable = true;
             rightButton.interactable = true;
             plaintext.color = new Color(255, 0, 0, 0);
-            ciphertext.color = new Color(255, 0, 0, 0);
-            cipheralpha.color = new Color(255, 0, 0, 255);
-            plainalpha.color = new Color(0, 255, 255, 255);
+            ciphertext.color = new Color(0, 255, 255, 0);
+            cipheralpha.color = new Color(0, 255, 255, 255);
+            plainalpha.color = new Color(255, 0, 0, 255);
         }
         else if (scene == 8)
         {
             cipheralpha.text = "h i j k l m n o p q r s t u v w x y z a b c d e f g";
             leftButton.interactable = true;
             rightButton.interactable = true;
-            plaintext.color = new Color(0, 255, 255, 0);
-            ciphertext.color = new Color(255, 0, 0, 0);
-            cipheralpha.color = new Color(255, 0, 0, 255);
-            plainalpha.color = new Color(0, 255, 255, 255);
+            plaintext.color = new Color(255, 0, 0, 0);
+            ciphertext.color = new Color(0, 255, 255, 0);
+            cipheralpha.color = new Color(0, 255, 255, 255);
+            plainalpha.color = new Color(255, 0, 0, 255);
         }
         else if (scene == 9)
         {

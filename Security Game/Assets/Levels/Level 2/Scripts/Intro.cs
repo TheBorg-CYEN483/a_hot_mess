@@ -17,10 +17,10 @@ public class Intro : MonoBehaviour
     private bool activate = false;
     private Dictionary<int, Action> pageMethods;
     private List<string> openingDialogue = new List<string>() {
-        "Charles: This is called a packet. Packets send information from one computer to the next. Think of packets like letters in the mail.",
+        "Charles: This is called a packet. Packets send information from one computer to the next. Think of packets like letters in the mail. They have a sender, receiver, and messages inside.",
         "The packets go from one router to the next until they get to their destination. That is how information travels over the Internet.",
         "Each packet here has a destination and information that the packet is transporting. When you use a tool like WireShark to view packets, you can see this information.",
-        "To get the packets on your computer where you can view them you will have to spoof your IP address. Your current IP address will be labeled on the terminal.",
+        "To get the packets on your computer where you can view them you will have to spoof your IP address. Your spoofed IP address will be labeled on the terminal.",
         "Using the nmap command you can intercept packets and send them to your computer. You can then view and change then information in the packet using WireShark and set commands (See Manual)."
         };
 
@@ -40,7 +40,7 @@ public class Intro : MonoBehaviour
     private void ShowPage_4()
     {
         dialogue.text = openingDialogue[page];
-        terminal.GetComponentInChildren<Text>().text = " TERMINAL    IP: 8.8.8.8\n\n>> nmap -s 8.8.8.8 192.168.1.103";
+        terminal.GetComponentInChildren<Text>().text = " TERMINAL    Spoofed IP: 8.8.8.8\n\n>> nmap -s 8.8.8.8 192.168.1.103";
     }
 
     private void ShowPage_3()

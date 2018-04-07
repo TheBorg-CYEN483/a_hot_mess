@@ -28,12 +28,13 @@ public class Login : MonoBehaviour
     {
         if (username.text == user && password.text == pass)
         {
-            Debug.Log("Logged in...");
-            // SceneManager.LoadScene("Level 0");
+            SceneManager.LoadScene("NewUser");
         }
-        // else if (Login credentials match existing user) {
-        //		SceneManager.LoadScene(PlayerPrefs.GetString("Level"));
-        // }
+        else if (PlayerPrefs.GetString(username.text + "." + password.text + ".Level") != "") {
+            PlayerPrefs.SetString("Username", username.text);
+            PlayerPrefs.SetString("Password", password.text);
+            SceneManager.LoadScene(PlayerPrefs.GetString(username.text + "." + password.text + ".Level"));
+        }
         else
         {
             output.text = "Incorrect username or password";

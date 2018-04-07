@@ -46,7 +46,8 @@ public class Level3End : MonoBehaviour
         }
         if (scene == 1)
         {
-            SceneManager.LoadScene(("StairsFromLevel3"));
+            PlayerPrefs.SetString(PlayerPrefs.GetString("Username") + "." + PlayerPrefs.GetString("Password") + ".Level", "Stairs4");
+            SceneManager.LoadScene("Stairs4");
         }
     }
 

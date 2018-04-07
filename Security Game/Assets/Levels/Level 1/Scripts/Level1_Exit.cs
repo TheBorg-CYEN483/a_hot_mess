@@ -12,8 +12,10 @@ public class Level1_Exit : MonoBehaviour
 
 	public InputField passwordField;
 	public GameObject openDoor;
+    public GameObject networkDialog;
 	public GameObject chatNotice;
 	public GameObject badgeScreen;
+    public GameObject player;
 
 	// Use this for initialization
 	void Start ()
@@ -24,6 +26,7 @@ public class Level1_Exit : MonoBehaviour
 		chatNotice.GetComponent<Text> ().text = "\"thebestpassword\" must be their password! Go type it in!";
 		openDoor.SetActive (false);
 		badgeScreen.SetActive (false);
+        player.SetActive(false);
 	}
 	
 	// Update is called once per frame
@@ -34,7 +37,7 @@ public class Level1_Exit : MonoBehaviour
 		{
 			buttonNext = false;
 			PlayerPrefs.SetString (PlayerPrefs.GetString ("Username") + "." + PlayerPrefs.GetString ("Password") + ".Level1", "Level 2_Scene");
-			SceneManager.LoadScene ("Level 2_Scene");
+			SceneManager.LoadScene ("Stairs2");
 //			return;
 		}
 
@@ -52,6 +55,8 @@ public class Level1_Exit : MonoBehaviour
 			if (input == "thebestpassword")
 			{
 				openDoor.SetActive (true);
+                networkDialog.SetActive (false);
+                player.SetActive(true);
 				chatNotice.GetComponent<Text> ().text = "Now that you're on the network, the door unlocked to let you through! " +
 				"Keep going, and be careful! Who knows what might happen to you if they find out you hacked in!";
 				page++;

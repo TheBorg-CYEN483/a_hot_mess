@@ -13,15 +13,19 @@ public class Level4_2 : MonoBehaviour {
     public Button chatbutton;
     public Button manualbutton;
     public Image panel;
+    public Image alanpic;
     public Text alan;
     public Image meme;
     public int count;
+    int level = 0;
 
 	// Use this for initialization
 	void Start () {
         chatbutton.onClick.AddListener(() => chat());               //chat button
         manualbutton.onClick.AddListener(() => manual());           //manual button
         chat();
+        inputfield.text = "";
+        inputfield.ActivateInputField();
     }
 	
 	// Update is called once per frame
@@ -31,7 +35,7 @@ public class Level4_2 : MonoBehaviour {
         {
             ("Cat\\ Videos"),
             ("Error\\ 404\\ Not\\ Found"),
-            ("Information\\ on\\ How\\ to\\ Pixilate\\ Someone"),
+            ("Information\\ on\\ How\\ to\\ Pixelate\\ Someone"),
             ("Pictures"),
             ("Totally\\ Not\\ Alan")
         };
@@ -47,7 +51,7 @@ public class Level4_2 : MonoBehaviour {
                 {
                     if(input_parse[2] == "-iname")
                     {
-                        if (input_parse[3] == "alan")
+                        if (input_parse[3] == "alan" || input_parse[3] == "Alan")
                         {
                             output_text.text = "Alan is in the Viruses folder.";
                         }
@@ -58,7 +62,7 @@ public class Level4_2 : MonoBehaviour {
                     }
                     else if (input_parse[2] == "Alan")
                     {
-                        output_text.text = "Alan is in the 'Viruses' folder";
+                        output_text.text = "Alan is in the Viruses folder.";
                     }
                 }
             }
@@ -71,17 +75,21 @@ public class Level4_2 : MonoBehaviour {
             {
                 new_text = input_text.Replace("cd ", "");
 
-                if (new_text == "Viruses")
+                if (new_text == "Viruses" && level == 0)
                 {
                     panel.color = new Color(255, 255, 255, 255);
+                    alan.color = new Color(0, 0, 0, 255);
+                    alanpic.color = new Color(255, 255, 255, 255);
                     alan.text = "Alan.jpg";
                     count = 1;
+                    level = 1;
                 }
-                else if(new_text == "Memes")
+                else if(new_text == "Memes" && level == 0)
                 {
                     meme.color = new Color(255, 255, 255, 255);
+                    level = 1;
                 }
-                else if(options[0].Contains(new_text) || options[1].Contains(new_text) || options[2].Contains(new_text) || options[3].Contains(new_text) || options[4].Contains(new_text))
+                else if(options[0].Equals(new_text) || options[1].Equals(new_text) || options[2].Equals(new_text) || options[3].Equals(new_text) || options[4].Equals(new_text))
                 {
                     output_text.text = "Alan isn't here";
                 }
@@ -90,7 +98,9 @@ public class Level4_2 : MonoBehaviour {
                     panel.color = new Color(255, 255, 255, 0);
                     meme.color = new Color(255, 255, 255, 0);
                     alan.color = new Color(255, 255, 255, 0);
-
+                    alanpic.color = new Color(255, 255, 255, 0);
+                    level = 0;
+                    count = 0;
                 }
             }
 

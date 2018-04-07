@@ -9,11 +9,15 @@ public class End : MonoBehaviour
     public Button leftButton;
     public Text dialogue;
     private int page = 0;
+    public GameObject stationary;
+    public GameObject moving;
     // private Dictionary<int, Action> pageMethods;
     private List<string> openingDialogue = new List<string>() {
         "Charles: That was impressive. Remind me to stay on your good side, wouldn't want you near my router.",
         "Ada: Yes, yes, good for you, don't do it again. Now go to the next floor.",
         };
+
+    
 
     public void ClickNext()
     {
@@ -23,9 +27,16 @@ public class End : MonoBehaviour
         }
         else
         {
-            // SceneManager.LoadScene("Level 2_Intro");
+            PlayerPrefs.SetString(PlayerPrefs.GetString("Username") + "." + PlayerPrefs.GetString("Password") + ".Level", "Stairs3");
+            SceneManager.LoadScene("Stairs3");
         }
         leftButton.interactable = true;
+
+        if(page == 1)
+        {
+            moving.SetActive(true);
+            stationary.SetActive(false);
+        }
     }
 
     public void ClickPrev()

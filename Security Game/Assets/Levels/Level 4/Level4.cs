@@ -29,6 +29,8 @@ public class Level4 : MonoBehaviour
     public char[] crypto = new char[235];
     public string[] plaintemp = new string[235];
     public System.Random rnd = new System.Random();
+    int linecounter = 0;
+    public Scrollbar scroller;
 
 
     // Use this for initialization
@@ -62,6 +64,8 @@ cryptographer  no one will ever decipher this ";
         right_button.onClick.AddListener(() => goForward());
         Destroy(Level_4, 3);
         Destroy(blackoutScreen, 3);
+        inputfield.text = "";
+        inputfield.ActivateInputField();
 
 
         int new_crypto = rnd.Next(1, 25);                           //create a random number
@@ -113,6 +117,11 @@ cryptographer  no one will ever decipher this ";
                 if (input_split[1] == ">")
                 {
                     output_text.text += ">>     " + input + "\n";
+                    linecounter += 1;
+                    if (linecounter > 4)
+                    {
+                        scroller.value -= (float).06;
+                    }
                     string one_char = input_split[2];                       //get the second part of the input
                     for (int i = 0; i < length; i++)
                     {

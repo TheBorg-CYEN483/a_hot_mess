@@ -139,7 +139,7 @@ public class Level2 : MonoBehaviour
                 {
                     if (split.Length == 1)
                     {
-                        output_text.text += ">>  " + "Command not recognized. Use the namp options." + "\n";
+                        output_text.text += ">>  " + "Command not recognized. Use the nmap options." + "\n";
                     }
                     else if (split[1] != "-s")
                     {
@@ -155,21 +155,26 @@ public class Level2 : MonoBehaviour
                         {
                             output_text.text += ">>  " + "Source IP is not valid." + "\n";
                         }
-                        else if (!Regex.IsMatch(split[3], ipRegex))
+                        else if (!Regex.IsMatch(split[3], ipRegex))                        
                         {
                             output_text.text += ">>  " + "Destination IP is not valid." + "\n";
+                        }
+                        else if (split[3] != "192.168.1.103" && split[3] != ip)
+                        {
+                            output_text.text += ">>  " + "Destination IP is in terminal label." + "\n";
                         }
                         else
                         {
                             output_text.text += ">>  " + input + "\n";
                             packet.SetActive(false);
-                            ip = split[2];
-                            ipAddress.text = " TERMINAL    Spoofed IP: " + ip;
 
-                            if (packet.GetComponentInChildren<TextMesh>().text.Contains("COMMAND=UNLOCK"))
+                            if (packet.GetComponentInChildren<TextMesh>().text.Contains("COMMAND=UNLOCK") && split[2] == "192.168.1.103" && split[3] == ip)
                             {
                                 SceneManager.LoadScene("Level 2_Badge");
                             }
+
+                            ip = split[2];
+                            ipAddress.text = " TERMINAL    Spoofed IP: " + ip;
                         }
                     }
                 }
@@ -228,7 +233,7 @@ public class Level2 : MonoBehaviour
             linecounter += 1;
             if (linecounter > 4)
             {
-                scroller.value -= (float).06;
+                scroller.value -= 0.004f;
             }
 
             inputfield.text = "";

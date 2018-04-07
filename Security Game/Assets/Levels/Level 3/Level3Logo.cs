@@ -3,50 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-public class Level3Logo : MonoBehaviour {
 
-	public Button rightButton;
-	public int scene = 0;
+public class Level3Logo : MonoBehaviour
+{
 
-
-	// Use this for initialization
-	void Start () 
-	{
-	   rightButton.onClick.AddListener(() => goForward());
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-		int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
-		 if (scene == 0)
-        {
-            rightButton.interactable = true;  
-        }
-		
-    }
-   
-
-
-	
-
-	void goForward()
+    void Start()
     {
-        if(scene < 1)
-        {
-            scene += 1;
-        }
-        if (scene == 1)
-        {
-            SceneManager.LoadScene(("Level 3"));
-        }
+        StartCoroutine(waiting());
     }
 
-    void goBackward()
+    // Update is called once per frame
+    void Update()
     {
-        if (scene > 0)
-        {
-            scene -= 1;
-        }
+    }
+    IEnumerator waiting()
+    {
+        yield return new WaitForSeconds(3f);
+        SceneManager.LoadScene(("Level 3"));
     }
 }

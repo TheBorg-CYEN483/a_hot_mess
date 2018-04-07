@@ -9,6 +9,8 @@ public class Level3_intro : MonoBehaviour
     public GameObject Gabriel;
     public GameObject Morgan;
     public GameObject Pat;
+    public GameObject turn;
+    public GameObject move;
  	public Button rightButton;
     public Button leftButton;
 	public Text dialogue;
@@ -49,6 +51,8 @@ public class Level3_intro : MonoBehaviour
 
         if (scene == 2)
         {
+            move.SetActive(false);
+            turn.SetActive(true);
             Gabriel.SetActive(true);
 			Morgan.SetActive(true);
 			Pat.SetActive(true);
@@ -68,10 +72,10 @@ public class Level3_intro : MonoBehaviour
     string[] dialogue_array = 
 			{"Ada: Hey, it looks like your computer is acting funny. Did you screw it up?\n" +
             "Charles: I bet his computer was hacked. Maybe you should look for malware.", 
-			"Malware is any program that you do not want, need, or ask for.\n", 
+			"Malware is a harmful program that damages or disables your computer.\n", 
             "Ada: We’re going to send some software to you. \nIt’s called MalChecker, and it will scan your files for malware.\n" +
             "Charles: This is what malware looks like.\n",
-            "Charles: Malchecker is sort of like using a flashlight in a dark room to look for monsters. In this case, the monsters are malware. " +
+            "Charles: MalChecker is sort of like using a flashlight in a dark room to look for monsters. In this case, the monsters are malware. " +
 			"So the MalChecker will show us where the malware is hiding in your folders.", ""};
    
 

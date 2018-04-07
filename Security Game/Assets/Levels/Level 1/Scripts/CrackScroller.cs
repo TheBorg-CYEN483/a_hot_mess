@@ -18,7 +18,7 @@ public class CrackScroller : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if (sr.verticalNormalizedPosition > 0.29)
+		if (sr.verticalNormalizedPosition > 0.2945)
 			sr.verticalNormalizedPosition -= 0.005f;
 	}
 }

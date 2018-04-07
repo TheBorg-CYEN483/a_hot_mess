@@ -218,7 +218,7 @@ public class Level1 : MonoBehaviour
 		linecounter += apprxLines;
 		if (linecounter > 6)
 		{
-			scroller.value = 1f - (0.07f * (float) (linecounter-5));
+			scroller.value = 1f - (0.0007f * (float) (linecounter-5));
 		}
 		Debug.Log (apprxLines + ", " + linecounter + " -> " + scroller.value);
 	}
